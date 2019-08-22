@@ -1,0 +1,18 @@
+{
+  "name": "deluxe-bill-splitter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full stack web app designed to tackle any bill splitting situation.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "cd client && npm start",
+    "install": "cd client && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djknit/Bill-Splitter-React.git"
+  },
+  "author": "David Knittel <djknit@gmail.com> (http://djknit.github.io/)",
+  "license": "MIT"
+}
