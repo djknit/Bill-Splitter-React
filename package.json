@@ -6,13 +6,19 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "cd client && npm start",
-    "install": "cd client && npm install"
+    "dev": "npm install && cd client && npm start",
+    "install": "cd client && npm install",
+    "build": "npm install && cd client && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/djknit/Bill-Splitter-React.git"
   },
   "author": "David Knittel <djknit@gmail.com> (http://djknit.github.io/)",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "path": "^0.12.7"
+  }
 }

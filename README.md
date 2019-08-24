@@ -51,9 +51,12 @@ This app was inspired by the following problem that I encountered a few years ag
 
 ## Action Plan
 
+##### In Progress:
+* [ ] Recreate with React the [current version](https://github.com/djknit/Delux-Bill-Splitter) of the app which was built using AngularJS.
+
 I am working to develop the basic functions on the front-end only. During this process, I will keep in mind that I plan to create a back-end and attempt to organize the data in a way that will make it easy to transfer state between the front and back ends.
 
-Currently, I am working on the "Enter Bills" page which is where the most important logic necessary for the MVP is contained.
+I am working on the "Enter Bills" page which is where the most important logic necessary for the MVP is contained.
 
 * [x] Create basic layout of page
 * [x] Create functionality to add and remove participants from the list.
