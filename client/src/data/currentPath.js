@@ -11,22 +11,22 @@ let currentPath = window.location.pathname;
 const pathChangeEventName = 'path-change';
 
 export default {
-  get currentPath() {
+  get value() {
     return currentPath;
   },
-  subscribePath(callback) {
+  subscribe(callback) {
     emitter.on(
       pathChangeEventName,
       callback
     );
   },
-  unsubPath(callback) {
+  unsub(callback) {
     emitter.removeListener(
       pathChangeEventName,
       callback
     );
   },
-  notifyPath(newPath) {
+  reportChange(newPath) {
     currentPath = newPath;
     emitter.emit(pathChangeEventName);
   } 

@@ -2,40 +2,35 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bulma/css/bulma.css';
 import './App.css';
-import './AppData';
+import windowWidth from './data/windowWidth';
 import Navbar from './components/navbar';
 import HomeView from './components/home-view';
 import EnterBillsView from './components/enter-bills-view';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.updatePath = this.updatePath.bind(this);
-
-    this.state = {
-      currentPath: window.location.pathname
-    }
+  constructor() {
+    super();
+    this.reportWindowWidthChange = this.reportWindowWidthChange.bind(this);
   }
 
-  updatePath(newPath) {
-    this.setState({
-      currentPath: newPath
-    });
+  reportWindowWidthChange() {
+    windowWidth.reportChange(window.innerWidth);
+  }
+
+  componentDidMount() {
+    this.reportWindowWidthChange();
+    window.addEventListener('resize', this.reportWindowWidthChange);
   }
 
   render() {
     return (
       <Router >
-        <Navbar updatePath={this.updatePath} currentPath={this.state.currentPath} />
+        <Navbar />
         <Switch>
           <Route
             exact
             path="/"
-            render={props => <HomeView
-              {...props}
-              updatePath={this.updatePath}
-              currentPath={this.state.currentPath} 
-            />}
+            component={HomeView}
           />
           <Route
             exact
