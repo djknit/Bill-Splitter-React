@@ -2,11 +2,15 @@ import React from 'react';
 
 function Message({
   theme,
-  children
+  size,
+  children,
+  align
 }) {
 
   let className = 'message';
   if (theme) className += ` is-${theme}`;
+  if (size) className += ` is-${size}`
+  if (align) className += ` has-text-${align}`
 
   return (
     <article className={className}>

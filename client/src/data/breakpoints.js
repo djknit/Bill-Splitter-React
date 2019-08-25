@@ -1,5 +1,3 @@
-import windowWidth from './windowWidth';
-
 // breakpoint value contains lower bound for screenwidth range and the horizontal padding that should be applied to top level components when screenwidth is in selected range
 function Breakpoint(minScreenWidth, recommendedXPadding) {
   return {
