@@ -38,7 +38,7 @@ class HomeView extends Component {
 
   render () {
     return (
-      <div style={this.state.style.homeView}>
+      <div style={this.state.style.view}>
         <Message theme="success" align="centered">
           <h2 className="title">Welcome to Dave's Delux Bill Splitting App!</h2>
         </Message>
@@ -57,7 +57,7 @@ class HomeView extends Component {
 
         <Message theme="secondary">
           <h5 className="subtitle has-text-centered">Press "Enter Bills" to get started!</h5>
-          <p>
+          <p className="margin-bottom">
             The app is not yet completely functional. You will not be able to calculate the bills,
             but you can get a feel for what the app looks like and how it is supposed to work.
           </p>
@@ -66,6 +66,7 @@ class HomeView extends Component {
               className="button is-info is-medium"
               to="/enter-bills"
               onClick={this.reportPathChange}
+              style={this.state.style.enterBillsButton}
             >
               Enter Bills
             </Link>

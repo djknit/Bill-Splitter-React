@@ -4,7 +4,8 @@ function Message({
   theme,
   size,
   children,
-  align
+  align,
+  style
 }) {
 
   let className = 'message';
@@ -13,7 +14,7 @@ function Message({
   if (align) className += ` has-text-${align}`
 
   return (
-    <article className={className}>
+    <article className={className} style={style}>
       <div className="message-body">
         {children}
       </div>
