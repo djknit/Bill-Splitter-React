@@ -8,7 +8,8 @@
     "start": "node server.js",
     "dev": "npm install && cd client && npm start",
     "install": "cd client && npm install",
-    "build": "npm install && cd client && npm run build"
+    "build": "npm install && cd client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",

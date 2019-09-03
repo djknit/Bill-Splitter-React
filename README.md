@@ -104,7 +104,7 @@ Once the above steps are complete, I will begin work on the back-end.
 (Coming soon...)
 
 ## Developer
-This project is developed and maintained by David Knittel. Any and all questions, comments, suggestions, or proposed contributions are welcome.
+This project is developed and maintained by David Knittel. Any and all questions, comments, suggestions, and/or proposed contributions are welcome.
 * Email: [djknit@gmail.com](mailto:djknit@gmail.com)
 * Portfolio: [djknit.github.io](https://djknit.github.io/)
 * GitHub: [github.com/djknit](https://github.com/djknit)
