@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import style from './style';
 import { participantsService } from '../data/entities'
 import PageSection from '../page-section';
-import ParticipantCard from './ParticipantCard';
-import ModalSkeleton from '../modal-skeleton';
+import ParticipantCard from './participant-card';
+import AddParticipantModal from './add-participant-modal';
 
 participantsService.add('Dave');
 
@@ -11,10 +11,10 @@ class ParticipantsSection extends Component {
   constructor() {
     super();
     this.getParticipants = this.getParticipants.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
+    this.setModalIsActive = this.setModalIsActive.bind(this);
     this.state = {
       participants: participantsService.value,
-      isModalActive: true
+      isModalActive: false
     };
   }
 
@@ -24,9 +24,9 @@ class ParticipantsSection extends Component {
     });
   }
 
-  toggleModal(open) {
+  setModalIsActive(isActive) {
     this.setState({
-      isModalActive: open
+      isModalActive: isActive
     });
   }
 
@@ -37,18 +37,28 @@ class ParticipantsSection extends Component {
   componentWillUnmount() {
     participantsService.unsub(this.getParticipants);
   }
-
+2
   render() {
     const { participants, isModalActive } = this.state;
+
     return (
-      <PageSection type="Participant" openModal>
-        {participants.map(
-          participant => <ParticipantCard
-            participant={participant}
-            key={participant.id}
-          />
-        )}
-      </PageSection>
+      <>
+        <PageSection
+          type="Participant"
+          openModal={() => this.setModalIsActive(true)}
+        >
+          {participants.map(
+            participant => <ParticipantCard
+              participant={participant}
+              key={participant.id}
+            />
+          )}
+        </PageSection>
+        <AddParticipantModal
+          isActive={isModalActive}
+          closeModal={() => this.setModalIsActive(false)}
+        />
+      </>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import getStyle from './style';
 
 function ModalSkeleton({
   title,
@@ -11,20 +12,32 @@ function ModalSkeleton({
   footerContent
 }) {
 
+  const style = getStyle({
+    hasSuccess,
+    hasDanger
+  });
+
   return (
     <div className={`modal${isActive ? ' is-active' : ''}`}>
       <div className="modal-background"></div>
       <div className="modal-card">
-        <header className="modal-card-head">
-          <p className="modal-card-title">{title}</p>
+        <header className="modal-card-head" style={style.header}>
+          <p className="modal-card-title" style={style.title}>
+            {title}
+          </p>
           <button className="delete" aria-label="close" onClick={closeModal}></button>
         </header>
         <section className="modal-card-body">
           {children}
         </section>
-        <footer className="modal-card-foot">
-          <button className="button is-success">Save changes</button>
-          <button className="button">Cancel</button>
+        <footer className="modal-card-foot" style={style.footer}>
+          <button className="button" onClick={cancel}>
+            {hasSuccess ?
+              'Done' :
+              'Cancel'
+            }
+          </button>
+          {footerContent}
         </footer>
       </div>
     </div>
