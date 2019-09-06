@@ -1,5 +1,8 @@
 // Creates data stores for both types of entities, 'entities' and 'agents' (billers)
 export default function EntitiesFactory(entityType) {
+  const EventEmitter = require('events');
+  const emitter = new EventEmitter();
+
   let entities = [];
   let nextEntityId = 1;
 
@@ -12,7 +15,7 @@ export default function EntitiesFactory(entityType) {
           return reject({
             message: 'There is already ' + (isParticipant ? 'a ' : 'an ') + entityType +
               ' in this list with the name "' + trimmedName + '." If you have two ' +
-              entityType + 's with the same name, you must add a number' + ' or other ' +
+              entityType + 's with the same name, you must add a number or other ' +
               'marker so that they can be identified.'
           });
         }
@@ -22,6 +25,7 @@ export default function EntitiesFactory(entityType) {
         };
         entities.push(newEntity);
         resolve(newEntity);
+        emitter.emit('change');
       }
     );
   }
@@ -50,9 +54,6 @@ export default function EntitiesFactory(entityType) {
       }
     );
   }
-
-  const EventEmitter = require('events');
-  const emitter = new EventEmitter();
 
   return {
     get value() {

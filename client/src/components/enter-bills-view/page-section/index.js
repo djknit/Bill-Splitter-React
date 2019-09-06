@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import style from './style';
-import ModalSkeleton from '../modal-skeleton';
 
 function Section({
   isButtonDisabled,
@@ -8,6 +7,7 @@ function Section({
   children,
   openModal
 }) {
+
   return (
     <div className="card" style={style.card}>
       <header className="card-header">

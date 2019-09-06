@@ -1,14 +1,14 @@
-export default function({ hasSuccess, hasDanger }) {
+export default function({ theme }) {
   const footer = {
     display: 'block',
     textAlign: 'right'
   };
 
-  return (hasSuccess || hasDanger) ?
+  return theme ?
     {
       header: {
-        backgroundColor: (hasSuccess && '#23d160') ||
-          (hasDanger && '#ff3860')
+        backgroundColor: (theme === 'success' && '#23d160') ||
+          (theme === 'danger' && '#ff3860')
       },
       title: {
         color: 'white'

@@ -3,19 +3,21 @@ import getStyle from './style';
 
 function ModalSkeleton({
   title,
+  theme,
   isActive,
   closeModal,
   children,
   hasSuccess,
-  hasDanger,
-  cancel,
+  reset,
   footerContent
 }) {
 
-  const style = getStyle({
-    hasSuccess,
-    hasDanger
-  });
+  const style = getStyle({ theme });
+
+  function cancel() {
+    closeModal();
+    reset();
+  }
 
   return (
     <div className={`modal${isActive ? ' is-active' : ''}`}>

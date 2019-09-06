@@ -5,9 +5,10 @@ import { participantsService } from '../../data/entities';
 class AddParticipantModal extends Component {
   constructor(props) {
     super(props);
-    this.cancel = this.cancel.bind(this);
+    this.reset = this.reset.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.submit = this.submit.bind(this);
+    // this.input = React.createRef();
     this.state = {
       hasSuccess: false,
       hasProblem: false,
@@ -15,12 +16,12 @@ class AddParticipantModal extends Component {
     };
   }
 
-  cancel() {
+  reset(focus) {
     this.setState({
       hasSuccess: false,
       inputValue: ''
     });
-    this.props.closeModal();
+    if (focus) this.props.focusInput();
   }
 
   handleInputChange(event) {
@@ -47,7 +48,8 @@ class AddParticipantModal extends Component {
   render() {
     const {
       isActive,
-      closeModal
+      closeModal,
+      inputRef
     } = this.props;
     const {
       hasSuccess,
@@ -61,12 +63,12 @@ class AddParticipantModal extends Component {
         isActive={isActive}
         closeModal={closeModal}
         hasSuccess={hasSuccess}
-        hasDanger={hasProblem}
-        cancel={this.cancel}
+        reset={this.reset}
         footerContent={
           hasSuccess ?
             <button
-              className="button is-primary"
+              className="button is-info"
+              onClick={() => this.reset(true)}
             >
               Add Another Participant
             </button> :
@@ -80,17 +82,19 @@ class AddParticipantModal extends Component {
       >
         <form id="add-participant-form" onSubmit={this.submit}>
           <div className="field">
-            <label className="label">
+            <label className="label" htmlFor="add-participant-form-name-input">
               Name
-              <input
-                value={inputValue}
-                onChange={this.handleInputChange}
-                className={`input ${(hasProblem && !hasSuccess) ? 'is-danger' : ''}`}
-                placeholder="New participant name..."
-                disabled={hasSuccess}
-                tabIndex={isActive ? 0 : -1}
-              />
             </label>
+            <input
+              id="add-participant-form-name-input"
+              ref={inputRef}
+              value={inputValue}
+              onChange={this.handleInputChange}
+              className={`input ${(hasProblem && !hasSuccess) ? 'is-danger' : ''}`}
+              placeholder="New participant name..."
+              disabled={hasSuccess}
+              tabIndex={isActive ? 0 : -1}
+            />
           </div>
         </form>
       </ModalSkeleton>
