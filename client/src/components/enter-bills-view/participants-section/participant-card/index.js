@@ -3,7 +3,8 @@ import style from './style';
 
 function ParticipantCard({
   participant,
-  isFirst
+  isFirst,
+  openRemoveParticipantModal
 }) {
 
   return (
@@ -14,7 +15,7 @@ function ParticipantCard({
       <button
         className="button is-danger"
         style={style.deleteButton}
-        // onClick={}
+        onClick={openRemoveParticipantModal}
       >
         &times;
       </button>

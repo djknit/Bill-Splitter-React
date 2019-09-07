@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ModalSkeleton from '../../modal-skeleton';
 import { participantsService } from '../../data/entities';
 import style from './style';
-console.log(style)
+
 const defaultState = {
   hasSuccess: false,
   hasProblem: false,
@@ -15,6 +15,7 @@ class AddParticipantModal extends Component {
     super(props);
     this.reset = this.reset.bind(this);
     this.submit = this.submit.bind(this);
+    this.cancelButtonRef = React.createRef();
     this.state = defaultState;
   }
 
@@ -30,19 +31,15 @@ class AddParticipantModal extends Component {
     });
   }
 
-  submit(event) {
-    event.preventDefault();
-    console.log('submit')
+  submit() {
+    const { participant } = this.props;
     participantsService
-      .add(this.state.inputValue)
-      .then(newP => {
-        console.log('new participant');
-        console.log(newP);
+      .remove(participant.id)
+      .then(removedParticipantName => {
         this.setState({
           hasSuccess: true,
           hasProblem: false,
-          hasInputProblem: false,
-          newParticipantName: newP.name,
+          removedParticipantName,
           errorMessage: null
         });
         this.cancelButtonRef.current.focus();
@@ -51,7 +48,6 @@ class AddParticipantModal extends Component {
         console.log(err);
         this.setState({
           hasProblem: true,
-          hasInputProblem: err.inputProblem,
           errorMessage: err.message
         });
       });
@@ -79,14 +75,7 @@ class AddParticipantModal extends Component {
         hasSuccess={hasSuccess}
         reset={this.reset}
         footerContent={
-          hasSuccess ?
-            <button
-              className="button is-info"
-              onClick={() => this.reset(true)}
-              ref={this.addAnotherPBtn}
-            >
-              Add Another Participant
-            </button> :
+          !hasSuccess &&
             <button
               className="button is-danger"
               onClick={this.submit}
@@ -94,6 +83,7 @@ class AddParticipantModal extends Component {
               Remove
             </button>
         }
+        cancelButtonRef={this.cancelButtonRef}
         cancelButtonSuccessText="OK"
       >
 
@@ -124,8 +114,8 @@ class AddParticipantModal extends Component {
             </h5>
             <p>
               You are about to remove <span style={style.name}>{participantToRemoveName}</span>
-              from this list's participants. You will <span style={style.bold}>not</span>
-              be able to easily undo this action.
+              &nbsp;from this list's participants. You will <span style={style.bold}>not</span>
+              &nbsp;be able to easily undo this action.
             </p>
           </div>
         )}

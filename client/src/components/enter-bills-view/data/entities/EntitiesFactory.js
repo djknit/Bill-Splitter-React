@@ -47,8 +47,8 @@ export default function EntitiesFactory(entityType) {
           if (entities[i].id === id) {
             const removedParticipantName = entities[i].name;
             entities.splice(i, 1);
-            // console.log(entities);
-            return resolve(removedParticipantName);
+            resolve(removedParticipantName);
+            emitter.emit('change');
           }
         }
         reject({ message: 'Sorry, that participant could not be found. Please try again.' });
@@ -73,6 +73,6 @@ export default function EntitiesFactory(entityType) {
       );
     },
     add: addEntity,
-    remove: removeEntity
+    remove: (entityType === 'participant') ? removeEntity : undefined
   };
 }

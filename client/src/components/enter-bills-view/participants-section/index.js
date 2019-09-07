@@ -18,7 +18,8 @@ class ParticipantsSection extends Component {
     this.state = {
       participants: participantsService.value,
       isAddPModalActive: false,
-      isRemovePModalActive: false
+      isRemovePModalActive: false,
+      participantToRemove: null
     };
   }
 
@@ -28,12 +29,14 @@ class ParticipantsSection extends Component {
     });
   }
 
-  toggleModal(addOrRemove, isActive) {
+  toggleModal(addOrRemove, isActive, participant) {
+    console.log(participant)
     const isAdd = addOrRemove === 'add';
     const propertyToSet = isAdd ? 'isAddPModalActive' : 'isRemovePModalActive';
     if (isActive && isAdd) this.focusModalInput();
     this.setState({
-      [propertyToSet]: isActive
+      [propertyToSet]: isActive,
+      participantToRemove: participant || null
     });
   }
 
@@ -54,7 +57,8 @@ class ParticipantsSection extends Component {
     const {
       participants,
       isAddPModalActive,
-      isRemovePModalActive
+      isRemovePModalActive,
+      participantToRemove
     } = this.state;
 
     return (
@@ -66,6 +70,7 @@ class ParticipantsSection extends Component {
           {participants.map(
             (participant, index) => <ParticipantCard
               participant={participant}
+              openRemoveParticipantModal={() => this.toggleModal('remove', true, participant)}
               key={participant.id}
               isFirst={index === 0}
             />
@@ -80,6 +85,7 @@ class ParticipantsSection extends Component {
         <RemoveParticipantModal
           isActive={isRemovePModalActive}
           closeModal={() => this.toggleModal('remove', false)}
+          participant={participantToRemove}
         />
       </>
     );
