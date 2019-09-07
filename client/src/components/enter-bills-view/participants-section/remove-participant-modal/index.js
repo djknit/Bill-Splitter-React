@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import ModalSkeleton from '../../modal-skeleton';
 import { participantsService } from '../../data/entities';
 import style from './style';
-
+console.log(style)
 const defaultState = {
   hasSuccess: false,
   hasProblem: false,
-  inputValue: '',
-  hasInputProblem: false,
-  newParticipantName: null,
+  removedParticipantName: null,
   errorMessage: null
 };
 
@@ -16,9 +14,7 @@ class AddParticipantModal extends Component {
   constructor(props) {
     super(props);
     this.reset = this.reset.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
     this.submit = this.submit.bind(this);
-    this.cancelButtonRef = React.createRef();
     this.state = defaultState;
   }
 
@@ -65,16 +61,15 @@ class AddParticipantModal extends Component {
     const {
       isActive,
       closeModal,
-      inputRef
+      participant
     } = this.props;
     const {
       hasSuccess,
       hasProblem,
-      inputValue,
-      hasInputProblem,
-      newParticipantName,
+      removedParticipantName,
       errorMessage
     } = this.state;
+    const participantToRemoveName = participant && participant.name;
 
     return (
       <ModalSkeleton
@@ -93,55 +88,53 @@ class AddParticipantModal extends Component {
               Add Another Participant
             </button> :
             <button
-              className="button is-success"
-              type="submit"
-              disabled={!inputValue}
+              className="button is-danger"
+              onClick={this.submit}
             >
-              Submit
+              Remove
             </button>
         }
-        cancelButtonRef={this.cancelButtonRef}
+        cancelButtonSuccessText="OK"
       >
 
-        {hasSuccess ?
+        {(hasSuccess &&
           <div className="notification is-success">
             <h5 className="title is-5" style={style.notificationTitle}>
               Success!
             </h5>
             <p>
               <span style={style.name}>
-                {newParticipantName}
-              </span> was added to the participants for this list.
+                {removedParticipantName}
+              </span> was removed from the participants for this list.
             </p>
-          </div> :
-          hasProblem &&
-            <div className="notification is-danger">
-              <h5 className="title is-5" style={style.notificationTitle}>
-                Error
-              </h5>
-              <p>
-                {errorMessage || <>An unknown error has occurred. Please try again.</>}
-              </p>
-            </div>
-        }
-
-        <form id="add-participant-form" onSubmit={this.submit}>
-          <div className="field">
-            <label className="label" htmlFor="add-participant-form-name-input">
-              Name
-            </label>
-            <input
-              id="add-participant-form-name-input"
-              ref={inputRef}
-              value={inputValue}
-              onChange={this.handleInputChange}
-              className={`input ${hasInputProblem ? 'is-danger' : ''}`}
-              placeholder="New participant name..."
-              disabled={hasSuccess}
-              tabIndex={isActive ? 0 : -1}
-            />
           </div>
-        </form>
+        ) || (hasProblem &&
+          <div className="notification is-danger">
+            <h5 className="title is-5" style={style.notificationTitle}>
+              Error
+            </h5>
+            <p>
+              {errorMessage || <>An unknown error has occurred. Please try again.</>}
+            </p>
+          </div>
+        ) || (
+          <div className="notification is-danger">
+            <h5 className="title is-5" style={style.notificationTitle}>
+              Warning
+            </h5>
+            <p>
+              You are about to remove <span style={style.name}>{participantToRemoveName}</span>
+              from this list's participants. You will <span style={style.bold}>not</span>
+              be able to easily undo this action.
+            </p>
+          </div>
+        )}
+
+        <p>
+          Are you sure you want to remove <span style={style.name}>
+            {participantToRemoveName}
+          </span>?
+        </p>
 
       </ModalSkeleton>
     );

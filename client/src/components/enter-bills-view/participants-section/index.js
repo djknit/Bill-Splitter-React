@@ -4,6 +4,7 @@ import { participantsService } from '../data/entities'
 import PageSection from '../page-section';
 import ParticipantCard from './participant-card';
 import AddParticipantModal from './add-participant-modal';
+import RemoveParticipantModal from './remove-participant-modal';
 
 participantsService.add('Dave');
 
@@ -11,12 +12,13 @@ class ParticipantsSection extends Component {
   constructor() {
     super();
     this.getParticipants = this.getParticipants.bind(this);
-    this.setModalIsActive = this.setModalIsActive.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
     this.focusModalInput = this.focusModalInput.bind(this);
     this.modalInputRef = React.createRef();
     this.state = {
       participants: participantsService.value,
-      isModalActive: false
+      isAddPModalActive: false,
+      isRemovePModalActive: false
     };
   }
 
@@ -26,10 +28,12 @@ class ParticipantsSection extends Component {
     });
   }
 
-  setModalIsActive(isActive) {
-    if (isActive) this.focusModalInput();
+  toggleModal(addOrRemove, isActive) {
+    const isAdd = addOrRemove === 'add';
+    const propertyToSet = isAdd ? 'isAddPModalActive' : 'isRemovePModalActive';
+    if (isActive && isAdd) this.focusModalInput();
     this.setState({
-      isModalActive: isActive
+      [propertyToSet]: isActive
     });
   }
 
@@ -47,13 +51,17 @@ class ParticipantsSection extends Component {
   }
 
   render() {
-    const { participants, isModalActive } = this.state;
+    const {
+      participants,
+      isAddPModalActive,
+      isRemovePModalActive
+    } = this.state;
 
     return (
       <>
         <PageSection
           type="Participant"
-          openModal={() => this.setModalIsActive(true)}
+          openModal={() => this.toggleModal('add', true)}
         >
           {participants.map(
             (participant, index) => <ParticipantCard
@@ -64,10 +72,14 @@ class ParticipantsSection extends Component {
           )}
         </PageSection>
         <AddParticipantModal
-          isActive={isModalActive}
-          closeModal={() => this.setModalIsActive(false)}
+          isActive={isAddPModalActive}
+          closeModal={() => this.toggleModal('add', false)}
           inputRef={this.modalInputRef}
           focusInput={this.focusModalInput}
+        />
+        <RemoveParticipantModal
+          isActive={isRemovePModalActive}
+          closeModal={() => this.toggleModal('remove', false)}
         />
       </>
     );

@@ -9,7 +9,9 @@ function ModalSkeleton({
   children,
   hasSuccess,
   reset,
-  footerContent
+  cancelButtonRef,
+  footerContent,
+  cancelButtonSuccessText
 }) {
 
   const style = getStyle({ theme });
@@ -27,15 +29,19 @@ function ModalSkeleton({
           <p className="modal-card-title" style={style.title}>
             {title}
           </p>
-          <button className="delete" aria-label="close" onClick={closeModal}></button>
+          <button
+            className="delete"
+            aria-label="close"
+            onClick={hasSuccess ? cancel : closeModal}>
+          </button>
         </header>
         <section className="modal-card-body">
           {children}
         </section>
         <footer className="modal-card-foot" style={style.footer}>
-          <button className="button" onClick={cancel}>
+          <button className="button" onClick={cancel} ref={cancelButtonRef}>
             {hasSuccess ?
-              'Done' :
+              (cancelButtonSuccessText || 'Done') :
               'Cancel'
             }
           </button>

@@ -16,7 +16,8 @@ export default function EntitiesFactory(entityType) {
             message: 'There is already ' + (isParticipant ? 'a ' : 'an ') + entityType +
               ' in this list with the name "' + trimmedName + '." If you have two ' +
               entityType + 's with the same name, you must add a number or other ' +
-              'marker so that they can be identified.'
+              'marker so that they can be identified.',
+            inputProblem: true
           });
         }
         const newEntity = {
