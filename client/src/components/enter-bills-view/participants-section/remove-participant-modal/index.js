@@ -15,7 +15,6 @@ class AddParticipantModal extends Component {
     super(props);
     this.reset = this.reset.bind(this);
     this.submit = this.submit.bind(this);
-    this.cancelButtonRef = React.createRef();
     this.state = defaultState;
   }
 
@@ -32,7 +31,7 @@ class AddParticipantModal extends Component {
   }
 
   submit() {
-    const { participant } = this.props;
+    const { participant, cancelButtonRef } = this.props;
     participantsService
       .remove(participant.id)
       .then(removedParticipantName => {
@@ -42,7 +41,7 @@ class AddParticipantModal extends Component {
           removedParticipantName,
           errorMessage: null
         });
-        this.cancelButtonRef.current.focus();
+        cancelButtonRef.current.focus();
       })
       .catch(err => {
         console.log(err);
@@ -57,7 +56,8 @@ class AddParticipantModal extends Component {
     const {
       isActive,
       closeModal,
-      participant
+      participant,
+      cancelButtonRef
     } = this.props;
     const {
       hasSuccess,
@@ -83,7 +83,7 @@ class AddParticipantModal extends Component {
               Remove
             </button>
         }
-        cancelButtonRef={this.cancelButtonRef}
+        cancelButtonRef={cancelButtonRef}
         cancelButtonSuccessText="OK"
       >
 

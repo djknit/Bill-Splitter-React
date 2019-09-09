@@ -57,8 +57,10 @@ export default function EntitiesFactory(entityType) {
   }
 
   return {
-    get value() {
-      return entities.map(entity => Object.assign({}, entity));
+    getValue() {
+      return new Promise((resolve, reject) => {
+        resolve(entities.map(entity => Object.assign({}, entity)));
+      });
     },
     subscribe(callback) {
       emitter.on(

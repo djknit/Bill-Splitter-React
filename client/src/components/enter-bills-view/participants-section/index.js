@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import style from './style';
+import pageSectionStyle from '../page-section/style';
 import { participantsService } from '../data/entities'
 import PageSection from '../page-section';
 import ParticipantCard from './participant-card';
@@ -14,9 +14,11 @@ class ParticipantsSection extends Component {
     this.getParticipants = this.getParticipants.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.focusModalInput = this.focusModalInput.bind(this);
+    this.focusModalCancelBtn = this.focusModalCancelBtn.bind(this);
     this.modalInputRef = React.createRef();
+    this.modalCancelBtnRef = React.createRef();
     this.state = {
-      participants: participantsService.value,
+      participants: [],
       isAddPModalActive: false,
       isRemovePModalActive: false,
       participantToRemove: null
@@ -24,9 +26,9 @@ class ParticipantsSection extends Component {
   }
 
   getParticipants() {
-    this.setState({
-      participants: participantsService.value
-    });
+    participantsService
+      .getValue()
+      .then(participants => this.setState({ participants }));
   }
 
   toggleModal(addOrRemove, isActive, participant) {
@@ -34,6 +36,7 @@ class ParticipantsSection extends Component {
     const isAdd = addOrRemove === 'add';
     const propertyToSet = isAdd ? 'isAddPModalActive' : 'isRemovePModalActive';
     if (isActive && isAdd) this.focusModalInput();
+    else if (isActive) this.focusModalCancelBtn();
     this.setState({
       [propertyToSet]: isActive,
       participantToRemove: participant || null
@@ -45,7 +48,13 @@ class ParticipantsSection extends Component {
     setTimeout(() => self.modalInputRef.current.focus(), 250);
   }
 
+  focusModalCancelBtn() {
+    const self = this;
+    setTimeout(() => self.modalCancelBtnRef.current.focus(), 250);
+  }
+
   componentDidMount() {
+    this.getParticipants();
     participantsService.subscribe(this.getParticipants);
   }
 
@@ -67,14 +76,19 @@ class ParticipantsSection extends Component {
           type="Participant"
           openModal={() => this.toggleModal('add', true)}
         >
-          {participants.map(
-            (participant, index) => <ParticipantCard
-              participant={participant}
-              openRemoveParticipantModal={() => this.toggleModal('remove', true, participant)}
-              key={participant.id}
-              isFirst={index === 0}
-            />
-          )}
+          {participants.length > 0 ?
+            participants.map(
+              (participant, index) => <ParticipantCard
+                participant={participant}
+                openRemoveParticipantModal={() => this.toggleModal('remove', true, participant)}
+                key={participant.id}
+                isFirst={index === 0}
+              />
+            ) :
+            <p style={pageSectionStyle.emptySectionText}>
+              There are no participants in this list yet. Click the "Add" button below to add participants.
+            </p>
+          }
         </PageSection>
         <AddParticipantModal
           isActive={isAddPModalActive}
@@ -86,6 +100,7 @@ class ParticipantsSection extends Component {
           isActive={isRemovePModalActive}
           closeModal={() => this.toggleModal('remove', false)}
           participant={participantToRemove}
+          cancelButtonRef={this.modalCancelBtnRef}
         />
       </>
     );
