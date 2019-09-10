@@ -19,3 +19,9 @@ export default function({ theme }) {
       footer
     };
 };
+
+const notificationTitle = {
+  marginBottom: 10
+};
+
+export { notificationTitle };

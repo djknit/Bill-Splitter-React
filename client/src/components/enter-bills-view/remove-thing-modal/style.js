@@ -1,7 +1,7 @@
+import { notificationTitle } from '../modal-skeleton/style';
+
 export default {
-  notificationTitle: {
-    marginBottom: 10
-  },
+  notificationTitle,
   name: {
     fontStyle: 'italic'
   },

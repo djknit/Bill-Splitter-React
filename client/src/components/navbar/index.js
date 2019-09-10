@@ -8,13 +8,13 @@ class Navbar extends Component {
     super();
     this.updateStyle = this.updateStyle.bind(this);
     this.state = {
-      style: getStyle(windowWidth.value)
+      style: getStyle(windowWidth.getValue())
     };
   }
 
   updateStyle() {
     this.setState({
-      style: getStyle(windowWidth.value)
+      style: getStyle(windowWidth.getValue())
     });
   }
 

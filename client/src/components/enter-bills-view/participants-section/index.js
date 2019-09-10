@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import pageSectionStyle from '../page-section/style';
+import style from './style';
 import { participantsService } from '../data/entities'
 import PageSection from '../page-section';
 import ParticipantCard from './participant-card';
 import AddParticipantModal from './add-participant-modal';
-import RemoveParticipantModal from './remove-participant-modal';
+import RemoveThingModal from '../remove-thing-modal';
 
 participantsService.add('Dave');
 
@@ -85,7 +85,7 @@ class ParticipantsSection extends Component {
                 isFirst={index === 0}
               />
             ) :
-            <p style={pageSectionStyle.emptySectionText}>
+            <p style={style.emptySectionText}>
               There are no participants in this list yet. Click the "Add" button below to add participants.
             </p>
           }
@@ -96,11 +96,13 @@ class ParticipantsSection extends Component {
           inputRef={this.modalInputRef}
           focusInput={this.focusModalInput}
         />
-        <RemoveParticipantModal
+        <RemoveThingModal
+          thingType="participant"
           isActive={isRemovePModalActive}
           closeModal={() => this.toggleModal('remove', false)}
-          participant={participantToRemove}
           cancelButtonRef={this.modalCancelBtnRef}
+          thingsService={participantsService}
+          thingToRemove={participantToRemove}
         />
       </>
     );

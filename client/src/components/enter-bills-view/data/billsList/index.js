@@ -5,7 +5,7 @@ let bills = [];
 let nextBillbillId = 1;
 
 export default {
-  getBills() {
+  getValue() {
     return new Promise((resolve, reject) => {
       resolve(bills.map(bill => Object.assign({}, bill)));
     });
