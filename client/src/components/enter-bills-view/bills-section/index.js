@@ -22,7 +22,7 @@ class BillsSection extends Component {
 
   getBills() {
     billsListService
-      .getBills()
+      .getValue()
       .then(bills => this.setState({ bills }));
   }
 
@@ -33,11 +33,11 @@ class BillsSection extends Component {
   }
 
   toggleModal(addOrRemove, isActive, bill) {
-    console.log(bill)
+    // console.log(bill)
     const isAdd = addOrRemove === 'add';
     const propertyToSet = isAdd ? 'isAddBillModalActive' : 'isRemoveBillModalActive';
-    if (isActive && isAdd) this.focusModalInput();
-    else if (isActive) this.focusModalCancelBtn();
+    // if (isActive && isAdd) this.focusModalInput();
+    // else if (isActive) this.focusModalCancelBtn();
     this.setState({
       [propertyToSet]: isActive,
       billToRemove: bill || null
@@ -70,6 +70,7 @@ class BillsSection extends Component {
         <PageSection
           type="Bill"
           isButtonDisabled={participants.length === 0}
+          openModal={() => this.toggleModal('add', true)}
         >
           {(participants.length === 0 || bills.length === 0) ?
             <p style={style.emptySectionText}>
@@ -85,6 +86,7 @@ class BillsSection extends Component {
         </PageSection>
         <AddBillModal
           isActive={isAddBillModalActive}
+          closeModal={() => this.toggleModal('add', false)}
         />
         <RemoveThingModal
           thingType="bill"

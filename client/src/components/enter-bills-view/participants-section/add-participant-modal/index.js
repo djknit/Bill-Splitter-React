@@ -84,21 +84,23 @@ class AddParticipantModal extends Component {
         hasSuccess={hasSuccess}
         reset={this.reset}
         footerContent={
-          hasSuccess ?
-            <button
-              className="button is-info"
-              onClick={() => this.reset(true)}
-              ref={this.addAnotherPBtn}
-            >
-              Add Another Participant
-            </button> :
-            <button
-              className="button is-success"
-              type="submit"
-              disabled={!inputValue}
-            >
-              Submit
-            </button>
+          hasSuccess ? (
+              <button
+                className="button is-info"
+                onClick={() => this.reset(true)}
+              >
+                Add Another Participant
+              </button>
+            ) : (
+              <button
+                className="button is-success"
+                type="submit"
+                disabled={!inputValue}
+                form="add-participant-form"
+              >
+                Submit
+              </button>
+            )
         }
         cancelButtonRef={this.cancelButtonRef}
       >
