@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import dataService from './data';
 
 class BillersInput extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.getInputValue = this.getInputValue.bind(this);
     this.reportChange = this.reportChange.bind(this);
     this.reset = this.reset.bind(this);
@@ -36,6 +36,8 @@ class BillersInput extends Component {
   }
 
   render() {
+    const { formId } = this.props;
+
     return (
       <div className="field">
         <label htmlFor="" className="label"></label>

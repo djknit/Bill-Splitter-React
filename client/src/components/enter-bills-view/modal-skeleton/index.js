@@ -11,10 +11,11 @@ function ModalSkeleton({
   reset,
   cancelButtonRef,
   footerContent,
-  cancelButtonSuccessText
+  cancelButtonSuccessText,
+  padding
 }) {
 
-  const style = getStyle({ theme });
+  const style = getStyle({ theme, padding });
 
   function cancel() {
     closeModal();
@@ -35,7 +36,7 @@ function ModalSkeleton({
             onClick={hasSuccess ? cancel : closeModal}>
           </button>
         </header>
-        <section className="modal-card-body">
+        <section className="modal-card-body" style={style.cardBody}>
           {children}
         </section>
         <footer className="modal-card-foot" style={style.footer}>

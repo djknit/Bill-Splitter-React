@@ -6,7 +6,7 @@ class nameInput extends Component {
   constructor(props) {
     super(props);
     this.getInputValue = this.getInputValue.bind(this);
-    this.reportChange = this.reportChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
       inputValue: dataService.getValue()
     }
@@ -18,8 +18,9 @@ class nameInput extends Component {
     });
   }
 
-  reportChange(newValue) {
-    dataService.update(newValue);
+  handleChange(event) {
+    const { value } = event.target;
+    dataService.update(value);
   }
 
   componentDidMount() {
@@ -31,7 +32,7 @@ class nameInput extends Component {
   }
 
   render() {
-    const { formId } = this.props;
+    const { formId, inputRef } = this.props;
     const { inputValue } = this.state;
     const inputId = formId + '-name-in';
 
@@ -43,9 +44,10 @@ class nameInput extends Component {
         <div className="control">
           <input
             id={inputId}
+            ref={inputRef}
             className="input"
             placeholder="Give the bill a nickname..."
-            onChange={this.reportChange}
+            onChange={this.handleChange}
             value={inputValue}
           />
         </div>

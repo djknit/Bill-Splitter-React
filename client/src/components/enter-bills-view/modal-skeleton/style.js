@@ -1,23 +1,26 @@
-export default function({ theme }) {
+export default function({ theme, padding }) {
   const footer = {
     display: 'block',
     textAlign: 'right'
   };
 
-  return theme ?
-    {
-      header: {
+  return {
+    header: theme ?
+      {
         backgroundColor: (theme === 'success' && '#23d160') ||
           (theme === 'danger' && '#ff3860')
-      },
-      title: {
-        color: 'white'
-      },
-      footer
-    } :
-    {
-      footer
-    };
+      } :
+      {}
+    ,
+    title: theme ?
+      { color: 'white' } :
+      {}
+    ,
+    footer,
+    cardBody: padding ?
+      { padding } :
+      {}
+  };
 };
 
 const notificationTitle = {

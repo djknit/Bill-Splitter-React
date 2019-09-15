@@ -11,6 +11,11 @@ class BillsSection extends Component {
     super();
     this.getBills = this.getBills.bind(this);
     this.getParticipants = this.getParticipants.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.focusModalInput = this.focusModalInput.bind(this);
+    this.focusModalCancelBtn = this.focusModalCancelBtn.bind(this);
+    this.modalInputRef = React.createRef();
+    this.modalCancelBtnRef = React.createRef();
     this.state = {
       bills: [],
       participants: [],
@@ -36,12 +41,22 @@ class BillsSection extends Component {
     // console.log(bill)
     const isAdd = addOrRemove === 'add';
     const propertyToSet = isAdd ? 'isAddBillModalActive' : 'isRemoveBillModalActive';
-    // if (isActive && isAdd) this.focusModalInput();
-    // else if (isActive) this.focusModalCancelBtn();
+    if (isActive && isAdd) this.focusModalInput();
+    else if (isActive) this.focusModalCancelBtn();
     this.setState({
       [propertyToSet]: isActive,
       billToRemove: bill || null
     });
+  }
+
+  focusModalInput() {
+    const self = this;
+    setTimeout(() => self.modalInputRef.current.focus(), 250);
+  }
+
+  focusModalCancelBtn() {
+    const self = this;
+    setTimeout(() => self.modalCancelBtnRef.current.focus(), 250);
   }
 
   componentDidMount() {
@@ -87,6 +102,8 @@ class BillsSection extends Component {
         <AddBillModal
           isActive={isAddBillModalActive}
           closeModal={() => this.toggleModal('add', false)}
+          inputRef={this.modalInputRef}
+          focusInput={this.focusModalInput}
         />
         <RemoveThingModal
           thingType="bill"

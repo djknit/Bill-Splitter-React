@@ -3,23 +3,24 @@ import DataServiceFactory from '../../../../../../../utilities/data-service-fact
 let inputValue = generateAmountValueStore();
 
 function generateAmountValueStore() {
-  let raw = null;
+  let raw = '';
   let rounded = null;
   let display = null;
 
   return {
     set(value) {
       raw = value;
-      if (!value && value !== 0) {
+      const parsedValue = parseFloat(value);
+      if (value === '') {
         rounded = null;
         display = null;
       }
-      else if (value < 0) {
+      else if (parsedValue < 0) {
         rounded = null;
         display = 'negative';
       }
       else {
-        display = value.toFixed(2);
+        display = parsedValue.toFixed(2);
         rounded = parseFloat(display);
       }
     },

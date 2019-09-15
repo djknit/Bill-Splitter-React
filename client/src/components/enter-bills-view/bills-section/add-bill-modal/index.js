@@ -14,6 +14,7 @@ class AddBillModal extends Component {
   constructor(props) {
     super(props);
     this.reset = this.reset.bind(this);
+    this.cancelButtonRef = React.createRef();
     this.state = defaultState;
   }
 
@@ -21,14 +22,11 @@ class AddBillModal extends Component {
     this.setState(defaultState);
   }
 
-  submit(event) {
-    event.preventDefault();
-  }
-
   render() {
     const {
       isActive,
-      closeModal
+      closeModal,
+      inputRef
     } = this.props;
     const {
       hasSuccess,
@@ -63,9 +61,10 @@ class AddBillModal extends Component {
               </button>
             )
         }
+        padding={15}
       >
 
-        <NewBillForm />
+        <NewBillForm inputRef={inputRef} />
 
       </ModalSkeleton>
     );

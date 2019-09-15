@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import style from './style';
 import NameInput from './name-input';
 import AmountInput from './amount-input';
-// import BillersInput from './billers-input';
+import BillersInput from './billers-input';
 // import ResponsibilityInput from './responsibility-input';
 // import IsPaidInput from './is-paid-input';
 
@@ -22,8 +22,10 @@ class NewBillForm extends Component {
       submit,
       hasSuccess,
       hasProblem,
-      errorMessage
+      errorMessage,
+      inputRef
     } = this.props;
+    const { inputId } = formId + '-amount-in';
 
     return (
       <>
@@ -49,11 +51,12 @@ class NewBillForm extends Component {
         }
 
         <form id={formId} onSubmit={submit}>
-          <NameInput formId={formId} />
-          <hr />
-          <AmountInput />
-          {/* <BillersInput />
-          <ResponsibilityInput />
+          <NameInput formId={formId} inputRef={inputRef} />
+          <Divider />
+          <AmountInput formId={formId} />
+          <Divider />
+          <BillersInput formId={formId} />
+          {/* <ResponsibilityInput />
           <IsPaidInput /> */}
         </form>
       </>
@@ -62,3 +65,9 @@ class NewBillForm extends Component {
 }
 
 export default NewBillForm;
+
+function Divider() {
+  return (
+    <hr style={style.divider} />
+  );
+}
