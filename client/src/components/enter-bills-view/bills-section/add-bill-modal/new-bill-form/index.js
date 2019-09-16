@@ -7,8 +7,8 @@ import BillersInput from './billers-input';
 // import IsPaidInput from './is-paid-input';
 
 class NewBillForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.submit = this.submit.bind(this);
   }
 
@@ -19,13 +19,12 @@ class NewBillForm extends Component {
   render() {
     const {
       formId,
-      submit,
       hasSuccess,
       hasProblem,
       errorMessage,
       inputRef
     } = this.props;
-    const { inputId } = formId + '-amount-in';
+    // const { inputId } = formId + '-amount-in';
 
     return (
       <>
@@ -50,7 +49,7 @@ class NewBillForm extends Component {
           )
         }
 
-        <form id={formId} onSubmit={submit}>
+        <form id={formId} onSubmit={this.submit}>
           <NameInput formId={formId} inputRef={inputRef} />
           <Divider />
           <AmountInput formId={formId} />

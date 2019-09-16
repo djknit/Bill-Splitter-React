@@ -26,7 +26,7 @@ export default function DataServiceFactory({
   const methodKeys = Object.keys(methods);
 
   // copy methods to dataService so that event emitter is triggered when methods are called
-  // methods should all be synchronous or all asynchronous but not a mix
+  // methods should all be synchronous or all asynchronous but NOT a mix of both
   methodKeys.forEach(methodKey => {
     dataService[methodKey] = function(...args) {
       if (isAsync) {

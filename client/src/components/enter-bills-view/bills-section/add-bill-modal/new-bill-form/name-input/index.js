@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import dataService from './data';
 import style from './style';
+import TextInput from '../../../../../form-pieces/text-input';
 
-class nameInput extends Component {
+class NameInput extends Component {
   constructor(props) {
     super(props);
     this.getInputValue = this.getInputValue.bind(this);
@@ -18,8 +19,7 @@ class nameInput extends Component {
     });
   }
 
-  handleChange(event) {
-    const { value } = event.target;
+  handleChange(value) {
     dataService.update(value);
   }
 
@@ -34,26 +34,36 @@ class nameInput extends Component {
   render() {
     const { formId, inputRef } = this.props;
     const { inputValue } = this.state;
-    const inputId = formId + '-name-in';
+    const inputId = formId + '-name';
 
     return (
-      <div className="field">
-        <label htmlFor={inputId} className="label">
-          Bill Name <span style={style.normalWeight}>(Optional)</span>
-        </label>
-        <div className="control">
-          <input
-            id={inputId}
-            ref={inputRef}
-            className="input"
-            placeholder="Give the bill a nickname..."
-            onChange={this.handleChange}
-            value={inputValue}
-          />
-        </div>
-      </div>
+      <TextInput
+        inputRef={inputRef}
+        label="Bill Name"
+        sublabel="Optional"
+        placeholder="Give the bill a nickname..."
+        value={inputValue}
+        handleChange={this.handleChange}
+        formId={formId}
+        name="name"
+      />
+      // <div className="field">
+      //   <label htmlFor={inputId} className="label">
+      //     Bill Name <span style={style.normalWeight}>(Optional)</span>
+      //   </label>
+      //   <div className="control">
+      //     <input
+      //       id={inputId}
+      //       ref={inputRef}
+      //       className="input"
+      //       placeholder="Give the bill a nickname..."
+      //       onChange={this.handleChange}
+      //       value={inputValue}
+      //     />
+      //   </div>
+      // </div>
     );
   }
 }
 
-export default nameInput;
+export default NameInput;

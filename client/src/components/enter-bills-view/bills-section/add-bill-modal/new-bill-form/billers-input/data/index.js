@@ -45,6 +45,7 @@ let dataService = DataServiceFactory({
   },
   methods: {
     updateOneOrMoreBillers(value) {
+      console.log(value)
       inputValue.oneOrMoreBillers = value;
     },
     updateBillerMult(index, propName, value) {

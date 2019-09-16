@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import dataService from './data';
+import style from './style';
+import RadioInputs from '../../../../../form-pieces/radio-inputs';
 
 class BillersInput extends Component {
   constructor(props) {
@@ -37,14 +39,40 @@ class BillersInput extends Component {
 
   render() {
     const { formId } = this.props;
+    const { inputValue } = this.state;
 
     return (
-      <div className="field">
-        <label htmlFor="" className="label"></label>
-        <div className="control">
-          <input id="" className="input" type="text" />
-        </div>
-      </div>
+      <fieldset>
+        <legend className="label">
+          Biller <span style={style.normalWeight}>(Who is this bill paid to?)</span>
+        </legend>
+        {/* <div className="field">
+          <div className="control">
+            <label className="radio" style={style.radioLabelNotLast}>
+              <RadioInput value="one" selectedValue={inputValue.oneOrMoreBillers} />
+              One Biller (default)
+            </label>
+            <label className="radio">
+              <RadioInput value="more" selectedValue={inputValue.oneOrMoreBillers} />
+              Multiple Billers
+            </label>
+          </div>
+        </div> */}
+        <RadioInputs
+          selectedValue={inputValue.oneOrMoreBillers}
+          options={[
+            {
+              value: 'one',
+              label: 'One Biller (default)'
+            }, {
+              value: 'more',
+              label: 'Multiple Billers'
+            }
+          ]}
+          handleChange={dataService.updateOneOrMoreBillers}
+        />
+        <hr style={style.sectionSubdividerFirst} />
+      </fieldset>
     );
   }
 }

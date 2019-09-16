@@ -64,7 +64,13 @@ class AddBillModal extends Component {
         padding={15}
       >
 
-        <NewBillForm inputRef={inputRef} />
+        <NewBillForm
+          formId={formId}
+          hasSuccess={hasSuccess}
+          hasProblem={hasProblem}
+          errorMessage={errorMessage}
+          inputRef={inputRef}
+        />
 
       </ModalSkeleton>
     );
