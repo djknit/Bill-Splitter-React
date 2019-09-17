@@ -1,12 +1,17 @@
 import React from 'react';
 import { requireProps } from '../../../utilities';
-import style from './style';
+import getStyle from './style';
 
 function RadioInputs({
   selectedValue,
   options,
-  handleChange
+  handleChange,
+  sizeRatio
 }) {
+
+  requireProps({ selectedValue, options, handleChange });
+
+  const style = getStyle(sizeRatio);
 
   return (
     <div className="field">
@@ -17,7 +22,7 @@ function RadioInputs({
           return (
             <label
               className="radio"
-              style={(index === options.length - 1) ? {} : style.radioLabelNotLast}
+              style={(index === options.length - 1) ? style.radioLabelLast : style.radioLabelNotLast}
               key={value}
             >
               <input

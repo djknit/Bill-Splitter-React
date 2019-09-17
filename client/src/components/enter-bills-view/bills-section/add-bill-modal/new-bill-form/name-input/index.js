@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import dataService from './data';
-import style from './style';
+// import style from './style';
 import TextInput from '../../../../../form-pieces/text-input';
 
 class NameInput extends Component {
@@ -34,7 +34,6 @@ class NameInput extends Component {
   render() {
     const { formId, inputRef } = this.props;
     const { inputValue } = this.state;
-    const inputId = formId + '-name';
 
     return (
       <TextInput

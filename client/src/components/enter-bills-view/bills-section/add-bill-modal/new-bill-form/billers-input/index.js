@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import dataService from './data';
+import inputDataService from './data';
+import { agentsService } from '../../../../data/entities';
 import style from './style';
 import RadioInputs from '../../../../../form-pieces/radio-inputs';
+import BillerSingleInput from './biller-single-input';
 
 class BillersInput extends Component {
   constructor(props) {
@@ -10,14 +12,21 @@ class BillersInput extends Component {
     this.reportChange = this.reportChange.bind(this);
     this.reset = this.reset.bind(this);
     this.state = {
-      inputValue: {}
+      inputValue: inputDataService.getValue(),
+      agents: []
     }
   }
 
   getInputValue() {
     this.setState({
-      inputValue: dataService.getValue()
+      inputValue: inputDataService.getValue()
     });
+  }
+
+  getAgents() {
+    agentsService
+      .getValue()
+      .then(agents => this.setState({ agents }));
   }
 
   reportChange() {
@@ -29,17 +38,19 @@ class BillersInput extends Component {
   }
 
   componentDidMount() {
-    this.getInputValue();
-    dataService.subscribe(this.getInputValue);
+    this.getAgents();
+    inputDataService.subscribe(this.getInputValue);
+    agentsService.subscribe(this.getAgents);
   }
 
   componentWillUnmount() {
-    dataService.unsub(this.getInputValue);
+    inputDataService.unsub(this.getInputValue);
+    agentsService.subscribe(this.getAgents);
   }
 
   render() {
     const { formId } = this.props;
-    const { inputValue } = this.state;
+    const { inputValue, agents } = this.state;
 
     return (
       <fieldset>
@@ -69,9 +80,17 @@ class BillersInput extends Component {
               label: 'Multiple Billers'
             }
           ]}
-          handleChange={dataService.updateOneOrMoreBillers}
+          handleChange={inputDataService.updateOneOrMoreBillers}
         />
         <hr style={style.sectionSubdividerFirst} />
+        <div style={style.subsectionContainer}>
+          <BillerSingleInput
+            inputValue={inputValue.billerSingle}
+            updateBillerSingle={inputDataService.updateBillerSingle}
+            agents={agents}
+            formId={formId}
+          />
+        </div>
       </fieldset>
     );
   }

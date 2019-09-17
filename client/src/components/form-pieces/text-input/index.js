@@ -14,15 +14,17 @@ function TextInput({
   name
 }) {
 
-  requireProps({ label, value, handleChange, formId, name });
+  requireProps({ value, handleChange, formId, name });
 
   const inputId = `${formId}-${name}-in`;
 
   return (
     <div className={`field${inline ? ' is-horizontal' : ''}`}>
-      <label htmlFor={inputId} className="label" style={style.inlineLabel}>
-        {label} {sublabel && (<span style={style.normalWeight}>({sublabel})</span>)}
-      </label>
+      {label && (
+        <label htmlFor={inputId} className="label" style={style.inlineLabel}>
+          {label} {sublabel && (<span style={style.normalWeight}>({sublabel})</span>)}
+        </label>
+      )}
       <div className="control">
         <input
           id={inputId}

@@ -18,7 +18,13 @@ const sectionSubdividerFirst = {
   margin: '5px 0 5px 15px'
 }
 
+// for fields appearing in section below the <hr> mentioned in style-rule preceding this style-rule
+const subsectionContainer = {
+  padding: '0 0 0 15px'
+}
+
 export {
   normalWeight,
-  sectionSubdividerFirst
+  sectionSubdividerFirst,
+  subsectionContainer
 };

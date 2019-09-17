@@ -56,15 +56,15 @@ class AmountInput extends Component {
           />
         </div>
         {
-          dataValues.display === 'negative' && (
+          (dataValues.display === 'negative' && (
             <div style={style.amountDisplayNegative}>
               Negative values are not allowed
             </div>
-          ) || dataValues.display !== null && (
+          )) || (dataValues.display !== null && (
             <div style={style.amountDisplay}>
               $ {dataValues.display}
             </div>
-          )
+          ))
         }
       </div>
     );

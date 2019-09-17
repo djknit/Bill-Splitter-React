@@ -23,7 +23,9 @@ export default {
     );
   },
   add(newBill) {
-    bills.push(newBill);
+    let bill = { id: nextBillbillId++ };
+    Object.assign(bill, newBill);
+    bills.push(bill);
   },
   remove(billId) {
     return new Promise(

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import style from './style';
-import { participantsService } from '../../data/entities';
+// import { participantsService } from '../../data/entities';
 import ModalSkeleton from '../../modal-skeleton';
 import NewBillForm from './new-bill-form';
 

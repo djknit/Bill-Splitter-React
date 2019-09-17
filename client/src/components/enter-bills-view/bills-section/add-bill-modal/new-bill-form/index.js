@@ -14,6 +14,7 @@ class NewBillForm extends Component {
 
   submit(event) {
     event.preventDefault();
+    console.log('submit new-bill-form')
   }
 
   render() {

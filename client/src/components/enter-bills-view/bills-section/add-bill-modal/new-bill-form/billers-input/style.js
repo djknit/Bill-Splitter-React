@@ -1,6 +1,11 @@
-import { normalWeight, sectionSubdividerFirst } from '../style';
+import {
+  normalWeight,
+  sectionSubdividerFirst,
+  subsectionContainer
+} from '../style';
 
 export default {
   normalWeight,
-  sectionSubdividerFirst
+  sectionSubdividerFirst,
+  subsectionContainer
 };
