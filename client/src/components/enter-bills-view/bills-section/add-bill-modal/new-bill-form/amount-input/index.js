@@ -45,7 +45,7 @@ class AmountInput extends Component {
         <label htmlFor={inputId} className="label">
           Bill Total <span style={style.normalWeight}>(US Dollars)</span>
         </label>
-        <div className="control">
+        <div className="control has-icons-left">
           <input
             id={inputId}
             className="input"
@@ -54,6 +54,7 @@ class AmountInput extends Component {
             value={dataValues.raw}
             onChange={this.handleChange}
           />
+          <span className="icon is-left">$</span>
         </div>
         {
           (dataValues.display === 'negative' && (

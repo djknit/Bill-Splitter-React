@@ -3,18 +3,30 @@ import { generateAmountValueStore } from '../../amount-input/data';
 import { agentsService } from '../../../../../data/entities';
 
 let agents = [];
-agentsService.subscribe(_agents => agents = _agents);
+updateAgents();
+agentsService.subscribe(updateAgents);
+
+function updateAgents() {
+  agentsService
+    .getValue()
+    .then(_agents => {
+      agents = _agents;
+      dataService._emit();
+    });
+}
 
 let inputValue;
+let nextBillerMultInputId = 0;
 reset();
 
 function reset() {
+  nextBillerMultInputId = 0;
   inputValue = {
     oneOrMoreBillers: 'one',
     billersMultiple: [],
     billerSingle: {
       typeOrSelect: 'type',
-      selected: null,
+      selectedOptionIndex: null,
       typed: ''
     }
   };
@@ -29,7 +41,8 @@ function addBillerMultInput(n) {
       typeOrSelect: 'type',
       selected: null,
       typed: '',
-      amount: generateAmountValueStore()
+      amount: generateAmountValueStore(),
+      inputId: nextBillerMultInputId++
     });
   }
 }
@@ -49,7 +62,8 @@ let dataService = DataServiceFactory({
           selected,
           options: agents.map(
             agent => Object.assign(
-              { disabled: (selected === null || selected.id === agent.id) &&
+              { 
+                disabled: (selected === null || selected.id === agent.id) &&
                   billersMultSelectedIds.indexOf(agent.id) > -1
               },
               agent
@@ -60,7 +74,7 @@ let dataService = DataServiceFactory({
       ),
       billerSingle: Object.assign(
         {
-          options: agents.map(agent => Object.assign({}, agent))
+          options: agents.map(agent => Object.assign({}, agent)),
         },
         inputValue.billerSingle
       )
@@ -88,7 +102,8 @@ let dataService = DataServiceFactory({
     removeBillerMult(index) {
       inputValue.billersMultiple.splice(index, 1);
     },
-    _emit() {console.log('emit billers-input-data')}
+    _emit() {console.log('emit billers-input-data')},
+    reset
   },
   isAsync: false
 });

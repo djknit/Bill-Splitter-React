@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import inputDataService from './data';
 import { agentsService } from '../../../../data/entities';
 import style from './style';
-import RadioInputs from '../../../../../form-pieces/radio-inputs';
+import { RadioInputs } from '../../../../../form-pieces';
 import BillerSingleInput from './biller-single-input';
+import BillersMultipleInputs from './billers-multiple-inputs';
 
 class BillersInput extends Component {
   constructor(props) {
@@ -84,12 +85,22 @@ class BillersInput extends Component {
         />
         <hr style={style.sectionSubdividerFirst} />
         <div style={style.subsectionContainer}>
-          <BillerSingleInput
-            inputValue={inputValue.billerSingle}
-            updateBillerSingle={inputDataService.updateBillerSingle}
-            agents={agents}
-            formId={formId}
-          />
+          {
+            inputValue.oneOrMoreBillers === 'one' ?
+              <BillerSingleInput
+                inputValue={inputValue.billerSingle}
+                updateBillerSingle={inputDataService.updateBillerSingle}
+                agents={agents}
+                formId={formId}
+              />
+              :
+              <BillersMultipleInputs
+                inputValue={inputValue.billersMultiple}
+                updateBillersMultiple={inputDataService.updateBillersMultiple}
+                formId={formId}
+              />
+          }
+          
         </div>
       </fieldset>
     );

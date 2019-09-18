@@ -1,6 +1,6 @@
 import React from 'react';
-import { TextInput, RadioInputs } from '../../../../../../form-pieces';
 import getStyle from './style';
+import { TextInput, RadioInputs } from '../../../../../../form-pieces';
 
 function BillerSingleInput({
   inputValue,
@@ -49,21 +49,24 @@ function BillerSingleInput({
           ) : (
             <div className="field">
               <div className="control">
-                <div className="select">
+                <div className="select" style={style.selectInputDiv}>
                   <select
-                    value={inputValue.selected === null ? '' : inputValue.selected}
+                    value={inputValue.selectedOptionIndex === null ? '' : inputValue.selectedOptionIndex}
                     onChange={({ target }) => {
-                      const { value } = target;
-                      let reportedValue = value === '' ? null : Object.assign({}, agents[value]);
-                      updateBillerSingle('selected', reportedValue);
+                      updateBillerSingle('selectedOptionIndex', target.value);
                     }}
+                    style={inputValue.selectedOptionIndex === null ? style.selectInputNoSelection : style.selectInput}
                   >
-                    <option disabled value="">
+                    <option disabled value="" style={style.optionDisabled}>
                       Select biller name
                     </option>
                     {
-                      agents.map((agent, index) => (
-                        <option key={agent.id} value={index}>
+                      inputValue.options.map((agent, index) => (
+                        <option
+                          key={agent.id}
+                          value={index}
+                          style={style.option}
+                        >
                           {agent.name}
                         </option>
                       ))
