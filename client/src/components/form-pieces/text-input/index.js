@@ -9,7 +9,7 @@ function TextInput({
   placeholder,
   value,
   handleChange,
-  inline,
+  isInline,
   formId,
   name
 }) {
@@ -19,9 +19,9 @@ function TextInput({
   const inputId = `${formId}-${name}-in`;
 
   return (
-    <div className={`field${inline ? ' is-horizontal' : ''}`}>
+    <div className={`field${isInline ? ' is-horizontal' : ''}`}>
       {label && (
-        <label htmlFor={inputId} className="label" style={style.inlineLabel}>
+        <label htmlFor={inputId} className="label" style={isInline ? style.inlineLabel : {}}>
           {label} {sublabel && (<span style={style.normalWeight}>({sublabel})</span>)}
         </label>
       )}
