@@ -1,8 +1,9 @@
-import { normalWeight } from '../style';
+export default function(sizeRatio) {
+  if (!sizeRatio) sizeRatio = 1;
 
-export default {
-  normalWeight,
-  inlineLabel: {
-    paddingRight: 7
-  }
+  return {
+    input: {
+      fontSize: `${sizeRatio}rem`
+    }
+  };
 };

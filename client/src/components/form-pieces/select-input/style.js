@@ -1,42 +1,33 @@
-import { normalWeight } from '../style';
-
 export default function(sizeRatio) {
   if (!sizeRatio) sizeRatio = 1;
 
+  const fontSize = {
+    fontSize: `${sizeRatio}rem`
+  };
   const selectInput = {
-    width: '100%'
+    width: '100%',
+    ...fontSize
   };
   const lightGrayText = {
     color: '#dbdbdb'
   };
 
-  console.log({
-    legend: {
-      fontSize: `${sizeRatio}rem`
-    },
-    selectInputDiv: {
-      display: 'block'
-    },
-    selectInput,
-    selectInputNoSelection: Object({ color: 'graytext' }, selectInput)
-  })
-
   return {
-    legend: {
-      fontSize: `${sizeRatio}rem`
-    },
     selectInputDiv: {
       display: 'block'
     },
     selectInput,
-    selectInputNoSelection: Object.assign({}, lightGrayText, selectInput),
-    option: {
-      color: '#363636'
+    selectInputNoSelection: {
+      ...lightGrayText,
+      ...selectInput
     },
-    optionDisabled: lightGrayText,
-    normalWeight,
-    inlineLabel: {
-      paddingRight: 7
+    option: {
+      color: '#363636',
+      ...fontSize
+    },
+    optionDisabled: {
+      ...lightGrayText,
+      ...fontSize
     }
   };
 }

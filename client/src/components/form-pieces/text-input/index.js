@@ -1,6 +1,7 @@
 import React from 'react';
-import style from './style';
+import getStyle from './style';
 import { requireProps } from '../../../utilities';
+import BoxInputFrame from '../box-input-frame';
 
 function TextInput({
   inputRef,
@@ -11,31 +12,34 @@ function TextInput({
   handleChange,
   isInline,
   formId,
-  name
+  name,
+  sizeRatio
 }) {
 
   requireProps({ value, handleChange, formId, name });
 
   const inputId = `${formId}-${name}-in`;
 
+  const style = getStyle(sizeRatio);
+
   return (
-    <div className={`field${isInline ? ' is-horizontal' : ''}`}>
-      {label && (
-        <label htmlFor={inputId} className="label" style={isInline ? style.inlineLabel : {}}>
-          {label} {sublabel && (<span style={style.normalWeight}>({sublabel})</span>)}
-        </label>
-      )}
-      <div className="control">
-        <input
-          id={inputId}
-          ref={inputRef}
-          className="input"
-          placeholder={placeholder}
-          onChange={({ target }) => handleChange(target.value)}
-          value={value}
-        />
-      </div>
-    </div>
+    <BoxInputFrame
+      label={label}
+      sublabel={sublabel}
+      isInline={isInline}
+      inputId={inputId}
+      sizeRatio={sizeRatio}
+    >
+      <input
+        id={inputId}
+        ref={inputRef}
+        className="input"
+        placeholder={placeholder}
+        onChange={({ target }) => handleChange(target.value)}
+        value={value}
+        style={style.input}
+      />
+    </BoxInputFrame>
   );
 }
 

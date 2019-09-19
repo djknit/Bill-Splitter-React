@@ -10,12 +10,10 @@ export default function(sizeRatio) {
     radioInput: {
       marginRight: 6
     },
-    radioLabelNotLast: Object.assign(
-      {
-        marginRight: 10
-      },
-      label
-    ),
+    radioLabelNotLast: {
+      marginRight: 10,
+      ...label
+    },
     radioLabelLast: label
   }
 };
