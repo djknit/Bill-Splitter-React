@@ -1,15 +1,14 @@
 import React from 'react';
 import getStyle from './style';
-import { TextInput, RadioInputs } from '../../../../../../form-pieces';
+import { TextInput, RadioInputs, SelectInput } from '../../../../../../form-pieces';
 
 function BillerSingleInput({
   inputValue,
   updateBillerSingle,
   agents,
-  formId
+  formId,
+  sizeRatio
 }) {
-
-  const sizeRatio = .9;
 
   const style = getStyle(sizeRatio);
 
@@ -45,36 +44,16 @@ function BillerSingleInput({
               formId={formId}
               name="biller-single-name-typed"
               handleChange={(value) => updateBillerSingle('typed', value)}
+              sizeRatio={sizeRatio}
             />
           ) : (
-            <div className="field">
-              <div className="control">
-                <div className="select" style={style.selectInputDiv}>
-                  <select
-                    value={inputValue.selectedOptionIndex === null ? '' : inputValue.selectedOptionIndex}
-                    onChange={({ target }) => {
-                      updateBillerSingle('selectedOptionIndex', target.value);
-                    }}
-                    style={inputValue.selectedOptionIndex === null ? style.selectInputNoSelection : style.selectInput}
-                  >
-                    <option disabled value="" style={style.optionDisabled}>
-                      Select biller name
-                    </option>
-                    {
-                      inputValue.options.map((agent, index) => (
-                        <option
-                          key={agent.id}
-                          value={index}
-                          style={style.option}
-                        >
-                          {agent.name}
-                        </option>
-                      ))
-                    }
-                  </select>
-                </div>
-              </div>
-            </div>
+            <SelectInput
+              placeholder="Select biller name"
+              options={inputValue.options}
+              selectedOptionIndex={inputValue.selectedOptionIndex}
+              handleChange={value => updateBillerSingle('selectedOptionIndex', value)}
+              sizeRatio={sizeRatio}
+            />
           )
       }
     </fieldset>

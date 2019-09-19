@@ -17,9 +17,9 @@ function SelectInput({
   sizeRatio
 }) {
 
-  requireProps({ value, handleChange, formId, name });
+  // requireProps(label ? { handleChange, formId, name } : { handleChange });
 
-  const inputId = `${formId}-${name}-in`;
+  const inputId = formId && name && `${formId}-${name}-in`;
 
   const style = getStyle(sizeRatio);
 

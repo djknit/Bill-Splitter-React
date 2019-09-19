@@ -1,12 +1,15 @@
 import TextInput from './text-input';
 import RadioInputs from './radio-inputs';
+import SelectInput from './select-input';
 
 export default {
   TextInput,
-  RadioInputs
+  RadioInputs,
+  SelectInput
 };
 
 export {
   TextInput,
-  RadioInputs
+  RadioInputs,
+  SelectInput
 };

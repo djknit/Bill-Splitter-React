@@ -53,6 +53,8 @@ class BillersInput extends Component {
     const { formId } = this.props;
     const { inputValue, agents } = this.state;
 
+    const subSectionSizeRatio = .9;
+
     return (
       <fieldset>
         <legend className="label">
@@ -92,6 +94,7 @@ class BillersInput extends Component {
                 updateBillerSingle={inputDataService.updateBillerSingle}
                 agents={agents}
                 formId={formId}
+                sizeRatio={subSectionSizeRatio}
               />
               :
               <BillersMultipleInputs

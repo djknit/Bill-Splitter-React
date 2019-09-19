@@ -14,7 +14,8 @@ export default function(sizeRatio) {
 
   return {
     selectInputDiv: {
-      display: 'block'
+      display: 'block',
+      ...fontSize
     },
     selectInput,
     selectInputNoSelection: {

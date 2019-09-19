@@ -8,17 +8,6 @@ export default function(sizeRatio) {
     color: '#dbdbdb'
   };
 
-  console.log({
-    legend: {
-      fontSize: `${sizeRatio}rem`
-    },
-    selectInputDiv: {
-      display: 'block'
-    },
-    selectInput,
-    selectInputNoSelection: Object({ color: 'graytext' }, selectInput)
-  })
-
   return {
     legend: {
       fontSize: `${sizeRatio}rem`
