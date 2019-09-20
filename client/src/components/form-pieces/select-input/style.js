@@ -9,7 +9,7 @@ export default function(sizeRatio) {
     ...fontSize
   };
   const lightGrayText = {
-    color: '#dbdbdb'
+    color: 'rgba(54, 54, 54, 0.3)' // chosen to match input placeholder
   };
 
   return {

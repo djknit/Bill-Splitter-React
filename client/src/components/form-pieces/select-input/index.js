@@ -23,6 +23,8 @@ function SelectInput({
 
   const style = getStyle(sizeRatio);
 
+  if (value === null) value = '';
+
   return (
     <BoxInputFrame
       label={label}
@@ -36,7 +38,9 @@ function SelectInput({
           id={inputId}
           ref={inputRef}
           value={value}
-          onChange={({ target }) => handleChange(target.value)}
+          onChange={({ target }) => {
+            handleChange(target.value === '' ? null : target.value);
+          }}
           style={value === '' ? style.selectInputNoSelection : style.selectInput}
         >
           {

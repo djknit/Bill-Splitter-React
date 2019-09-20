@@ -10,7 +10,7 @@ function BillersMultipleInputs({
 
   return (
     <>
-      {
+      {/* {
         inputValue.map((billerMultInput, index) => (
           <fieldset key={billerMultInput.inputId}>
             <legend>
@@ -19,7 +19,7 @@ function BillersMultipleInputs({
             {console.log(billerMultInput)}
           </fieldset>
         ))
-      }
+      } */}
     </>
   );
 }

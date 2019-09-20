@@ -1,111 +1,53 @@
 import DataServiceFactory from '../../../../../../../utilities/data-service-factory';
 import { generateAmountValueStore } from '../../amount-input/data';
-import { agentsService } from '../../../../../data/entities';
+import billerSingleService from '../biller-single-input/data';
+import billersMultipleService from '../billers-multiple-inputs/data';
 
-let agents = [];
-updateAgents();
-agentsService.subscribe(updateAgents);
+let inputValue = {
+  oneOrMoreBillers: 'one',
+  billerSingle: billerSingleService.getValue(),
+  billersMultiple: billersMultipleService.getValue()
+};
 
-function updateAgents() {
-  agentsService
-    .getValue()
-    .then(_agents => {
-      agents = _agents;
-      dataService._emit();
-    });
-}
-
-let inputValue;
-let nextBillerMultInputId = 0;
-reset();
+billerSingleService.subscribe(value => inputValue.billerSingle = value);
+billersMultipleService.subscribe(value => inputValue.billersMultiple = value);
 
 function reset() {
-  nextBillerMultInputId = 0;
-  inputValue = {
-    oneOrMoreBillers: 'one',
-    billersMultiple: [],
-    billerSingle: {
-      typeOrSelect: 'type',
-      selectedBillerId: null,
-      typed: ''
-    }
-  };
-  addBillerMultInput(2);
+  oneOrMoreBillersService.reset();
+  billerSingleService.reset();
+  billersMultipleService.reset();
 }
 
-// adds n new biller inputs to Multiple Billers section
-function addBillerMultInput(n) {
-  if (!n) n = 1;
-  for (let i = 0; i < n; i++) {
-    inputValue.billersMultiple.push({
-      typeOrSelect: 'type',
-      selected: null,
-      typed: '',
-      amount: generateAmountValueStore(),
-      inputId: nextBillerMultInputId++
-    });
-  }
-}
-
-let dataService = DataServiceFactory({
+let oneOrMoreBillersService = DataServiceFactory({
   readFunction() {
-    const billersMultSelectedIds = inputValue.billersMultiple.filter(
-      billerMultInput => billerMultInput.selected !== null
-    ).map(
-      billerMultInput => billerMultInput.selected.id
-    );
-    return {
-      oneOrMoreBillers: inputValue.oneOrMoreBillers,
-      billersMultiple: inputValue.billersMultiple.map(
-        ({ amount, selected, ...otherProps }) => ({
-          amount: amount.get(),
-          selected,
-          options: agents.map(
-            agent => Object.assign(
-              { 
-                disabled: (selected === null || selected.id === agent.id) &&
-                  billersMultSelectedIds.indexOf(agent.id) > -1
-              },
-              agent
-            )
-          ),
-          ...otherProps
-        })
-      ),
-      billerSingle: Object.assign(
-        {
-          options: agents.map(({ name, id }) => ({ name, value: id })),
-        },
-        inputValue.billerSingle
-      )
-    };
+    return inputValue.oneOrMoreBillers
   },
   methods: {
-    updateOneOrMoreBillers(value) {
+    update(value) {
       console.log(value)
       inputValue.oneOrMoreBillers = value;
     },
-    updateBillerMult(index, propName, value) {
-      const billerMult = inputValue.billersMultiple[index]
-      if (propName === 'amount') {
-        billerMult.amount.set(value);
-      }
-      else {
-        billerMult[propName] = value;
-      }
-    },
-    updateBillerSingle(propName, value) {
-      inputValue.billerSingle[propName] = value;
-      console.log(inputValue.billerSingle)
-    },
-    addBillerMult: addBillerMultInput,
-    removeBillerMult(index) {
-      inputValue.billersMultiple.splice(index, 1);
-    },
     _emit() {console.log('emit billers-input-data')},
-    reset
+    reset() {
+      inputValue.oneOrMoreBillers = 'one';
+    }
   },
   isAsync: false
 });
 
-export default dataService;
+let billersDataService = DataServiceFactory({
+  readFunction() {
+    return { ...inputValue };
+  },
+  methods: {
+    reset,
+    _emit() {}
+  },
+  isAsync: false
+});
+
+oneOrMoreBillersService.subscribe(() => billersDataService._emit());
+
+export default billersDataService;
+
+export { oneOrMoreBillersService };

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import inputDataService from './data';
-import { agentsService } from '../../../../data/entities';
+import { oneOrMoreBillersService } from './data';
 import style from './style';
 import { RadioInputs } from '../../../../../form-pieces';
 import BillerSingleInput from './biller-single-input';
@@ -10,48 +9,28 @@ class BillersInput extends Component {
   constructor(props) {
     super(props);
     this.getInputValue = this.getInputValue.bind(this);
-    this.reportChange = this.reportChange.bind(this);
-    this.reset = this.reset.bind(this);
     this.state = {
-      inputValue: inputDataService.getValue(),
-      agents: []
+      oneOrMoreBillersValue: oneOrMoreBillersService.getValue()
     }
   }
 
   getInputValue() {
     this.setState({
-      inputValue: inputDataService.getValue()
+      oneOrMoreBillersValue: oneOrMoreBillersService.getValue()
     });
   }
 
-  getAgents() {
-    agentsService
-      .getValue()
-      .then(agents => this.setState({ agents }));
-  }
-
-  reportChange() {
-
-  }
-
-  reset() {
-
-  }
-
   componentDidMount() {
-    this.getAgents();
-    inputDataService.subscribe(this.getInputValue);
-    agentsService.subscribe(this.getAgents);
+    oneOrMoreBillersService.subscribe(this.getInputValue);
   }
 
   componentWillUnmount() {
-    inputDataService.unsub(this.getInputValue);
-    agentsService.subscribe(this.getAgents);
+    oneOrMoreBillersService.unsub(this.getInputValue);
   }
 
   render() {
     const { formId } = this.props;
-    const { inputValue, agents } = this.state;
+    const { oneOrMoreBillersValue } = this.state;
 
     const subSectionSizeRatio = .9;
 
@@ -60,20 +39,8 @@ class BillersInput extends Component {
         <legend className="label">
           Biller <span style={style.normalWeight}>(Who is this bill paid to?)</span>
         </legend>
-        {/* <div className="field">
-          <div className="control">
-            <label className="radio" style={style.radioLabelNotLast}>
-              <RadioInput value="one" selectedValue={inputValue.oneOrMoreBillers} />
-              One Biller (default)
-            </label>
-            <label className="radio">
-              <RadioInput value="more" selectedValue={inputValue.oneOrMoreBillers} />
-              Multiple Billers
-            </label>
-          </div>
-        </div> */}
         <RadioInputs
-          selectedValue={inputValue.oneOrMoreBillers}
+          selectedValue={oneOrMoreBillersValue}
           options={[
             {
               value: 'one',
@@ -83,27 +50,22 @@ class BillersInput extends Component {
               label: 'Multiple Billers'
             }
           ]}
-          handleChange={inputDataService.updateOneOrMoreBillers}
+          handleChange={oneOrMoreBillersService.update}
         />
         <hr style={style.sectionSubdividerFirst} />
         <div style={style.subsectionContainer}>
           {
-            inputValue.oneOrMoreBillers === 'one' ?
+            oneOrMoreBillersValue === 'one' ?
               <BillerSingleInput
-                inputValue={inputValue.billerSingle}
-                updateBillerSingle={inputDataService.updateBillerSingle}
-                agents={agents}
                 formId={formId}
                 sizeRatio={subSectionSizeRatio}
               />
               :
               <BillersMultipleInputs
-                inputValue={inputValue.billersMultiple}
-                updateBillersMultiple={inputDataService.updateBillersMultiple}
                 formId={formId}
+                sizeRatio={subSectionSizeRatio}
               />
           }
-          
         </div>
       </fieldset>
     );
