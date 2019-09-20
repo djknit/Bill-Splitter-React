@@ -26,7 +26,7 @@ function reset() {
     billersMultiple: [],
     billerSingle: {
       typeOrSelect: 'type',
-      selectedOptionIndex: null,
+      selectedBillerId: null,
       typed: ''
     }
   };
@@ -74,7 +74,7 @@ let dataService = DataServiceFactory({
       ),
       billerSingle: Object.assign(
         {
-          options: agents.map(agent => Object.assign({}, agent)),
+          options: agents.map(({ name, id }) => ({ name, value: id })),
         },
         inputValue.billerSingle
       )

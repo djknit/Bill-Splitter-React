@@ -9,7 +9,7 @@ function SelectInput({
   sublabel,
   placeholder,
   options,
-  selectedOptionIndex,
+  value,
   handleChange,
   isInline,
   formId,
@@ -35,9 +35,9 @@ function SelectInput({
         <select
           id={inputId}
           ref={inputRef}
-          value={selectedOptionIndex === null ? '' : selectedOptionIndex}
+          value={value}
           onChange={({ target }) => handleChange(target.value)}
-          style={selectedOptionIndex === null ? style.selectInputNoSelection : style.selectInput}
+          style={value === '' ? style.selectInputNoSelection : style.selectInput}
         >
           {
             placeholder && (
@@ -49,8 +49,8 @@ function SelectInput({
           {
             options.map((option, index) => (
               <option
-                key={option.id}
-                value={index}
+                key={option.value}
+                value={option.value}
                 style={style.option}
               >
                 {option.name}

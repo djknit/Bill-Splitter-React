@@ -50,8 +50,8 @@ function BillerSingleInput({
             <SelectInput
               placeholder="Select biller name"
               options={inputValue.options}
-              selectedOptionIndex={inputValue.selectedOptionIndex}
-              handleChange={value => updateBillerSingle('selectedOptionIndex', value)}
+              value={inputValue.selectedBillerId === null ? '4' : inputValue.selectedBillerId}
+              handleChange={value => updateBillerSingle('selectedBillerId', value)}
               sizeRatio={sizeRatio}
             />
           )
