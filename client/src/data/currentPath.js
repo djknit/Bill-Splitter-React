@@ -14,8 +14,6 @@ let service = DataServiceFactory({
 
 export default service;
 
-console.log(service);
-
 // export default {
 //   get value() {
 //     return currentPath;

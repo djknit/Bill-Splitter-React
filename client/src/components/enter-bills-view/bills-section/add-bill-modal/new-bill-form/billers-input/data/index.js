@@ -1,5 +1,4 @@
 import DataServiceFactory from '../../../../../../../utilities/data-service-factory';
-import { generateAmountValueStore } from '../../amount-input/data';
 import billerSingleService from '../biller-single-input/data';
 import billersMultipleService from '../billers-multiple-inputs/data';
 

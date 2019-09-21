@@ -7,34 +7,73 @@ function BoxInputFrame({
   isInline,
   inputId,
   sizeRatio,
-  children
+  children,
+  hasIcon,
+  controlStyle
 }) {
+
+  // no need for inline when there is no label
+  if (label === undefined) isInline = false;
 
   const style = getStyle(sizeRatio);
 
-  return (
-    <div className={`field${isInline ? ' is-horizontal' : ''}`}>
-      {
-        label && (
-          <label
-            htmlFor={inputId}
-            className="label"
-            style={isInline ? style.inlineLabel : style.label}
-          >
-            {label}
-            {sublabel && (
-              <span style={style.normalWeight}>
-                &nbsp;({sublabel})
-              </span>
-            )}
-          </label>
-        )
-      }
-      <div className="control">
-        {children}
+  function Label() {
+    return label ? (
+      <label
+        htmlFor={inputId}
+        className="label"
+        style={style.label}
+      >
+        {label}
+        {sublabel && (
+          <span style={style.normalWeight}>
+            &nbsp;({sublabel})
+          </span>
+        )}
+      </label>
+    ) : (
+      <></>
+    )
+  };
+
+  return isInline ?
+    (
+      <div className="field is-horizontal">
+        <div className="field-label is-normal" style={style.fieldLabel}>
+          <Label />
+        </div>
+        <div className="field-body">
+          <div className="field">
+            <Control isInline hasIcon={hasIcon} style={controlStyle}>
+              {children}
+            </Control>
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    ) :
+    (
+      <div className="field">
+        <Label />
+        <Control hasIcon={hasIcon} style={controlStyle}>
+          {children}
+        </Control>
+      </div>
+    );
 }
 
 export default BoxInputFrame;
+
+function Control({ isInline, hasIcon, children, style }) {
+  let className = 'control';
+  if (isInline) className += ' is-expanded';
+  if (hasIcon) className += ' has-icons-left'
+
+  return (
+    <div
+      className={className}
+      style={style}
+    >
+      {children}
+    </div>
+  );
+}

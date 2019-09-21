@@ -1,8 +1,4 @@
-import DataServiceFactory from '../../../../../../../utilities/data-service-factory';
-
-let inputValue = generateAmountValueStore();
-
-function generateAmountValueStore() {
+export default function generateAmountValueStore() {
   let raw = '';
   let rounded = null;
   let display = null;
@@ -36,22 +32,3 @@ function generateAmountValueStore() {
     }
   };
 }
-
-let dataService = DataServiceFactory({
-  readFunction() {
-    return inputValue.get();
-  },
-  methods: {
-    update(newRawValue) {
-      inputValue.set(newRawValue);
-    },
-    reset() {
-      inputValue.reset();
-    }
-  },
-  isAsync: false
-});
-
-export default dataService;
-
-export { generateAmountValueStore }; 

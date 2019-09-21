@@ -13,25 +13,3 @@ const service = DataServiceFactory({
 });
 
 export default service;
-
-// export default {
-//   get value() {
-//     return windowWidth;
-//   },
-//   subscribe(callback) {
-//     emitter.on(
-//       changeEventName,
-//       callback
-//     );
-//   },
-//   unsub(callback) {
-//     emitter.removeListener(
-//       changeEventName,
-//       callback
-//     );
-//   },
-//   reportChange(newWidth) {
-//     windowWidth = newWidth;
-//     emitter.emit(changeEventName);
-//   } 
-// }

@@ -1,9 +1,9 @@
-export default function(sizeRatio) {
-  if (!sizeRatio) sizeRatio = 1;
+import { getFontSize } from '../style';
 
+export default function(sizeRatio) {
   return {
     input: {
-      fontSize: `${sizeRatio}rem`
+      fontSize: getFontSize(sizeRatio)
     }
   };
 };

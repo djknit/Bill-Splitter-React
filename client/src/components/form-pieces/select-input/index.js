@@ -55,7 +55,8 @@ function SelectInput({
               <option
                 key={option.value}
                 value={option.value}
-                style={style.option}
+                style={option.disabled ? style.optionDisabled : style.option}
+                disabled={option.disabled}
               >
                 {option.name}
               </option>

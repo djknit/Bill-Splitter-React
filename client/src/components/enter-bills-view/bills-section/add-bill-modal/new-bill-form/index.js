@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import style from './style';
 import NameInput from './name-input';
-import AmountInput from './amount-input';
+import AmountInput from './bill-amount-input';
 import BillersInput from './billers-input';
 // import ResponsibilityInput from './responsibility-input';
 // import IsPaidInput from './is-paid-input';
@@ -25,7 +25,6 @@ class NewBillForm extends Component {
       errorMessage,
       inputRef
     } = this.props;
-    // const { inputId } = formId + '-amount-in';
 
     return (
       <>

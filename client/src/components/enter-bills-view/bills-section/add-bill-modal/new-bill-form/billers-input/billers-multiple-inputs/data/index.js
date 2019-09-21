@@ -1,5 +1,4 @@
-import DataServiceFactory from '../../../../../../../../utilities/data-service-factory';
-import { generateAmountValueStore } from '../../../amount-input/data';
+import { DataServiceFactory, AmountValueStoreFactory } from '../../../../../../../../utilities';
 import { agentsService } from '../../../../../../data/entities';
 
 let agents = [];
@@ -15,12 +14,12 @@ function updateAgents() {
     });
 }
 
-let inputValues;
-let nextInputId = 0;
+let inputValues, nextInputId;
 reset();
 
 function reset() {
   inputValues = [];
+  nextInputId = 0;
   addInput(2);
 }
 
@@ -32,7 +31,7 @@ function addInput(n) {
       typeOrSelect: 'type',
       typed: '',
       selectedAgentId: null,
-      amount: generateAmountValueStore(),
+      amount: AmountValueStoreFactory(),
       inputId: nextInputId++ // used for repeated element unique key
     });
   }
@@ -45,7 +44,7 @@ function getOptions(selectedAgentId) {
     ({ name, id }) => (
       {
         name,
-        id,
+        value: id,
         disabled: (selectedAgentId !== id) && (allSelectedAgentIds.indexOf(id) !== -1)
       }
     )
@@ -71,8 +70,10 @@ let dataService = DataServiceFactory({
   },
   methods: {
     update(index, propName, value) {
-      if (propName === 'amount') inputValues[index].amount.set(value);
-      else inputValues[index][propName] = value;
+      const billerToUpdate =inputValues[index];
+      if (propName === 'amount') billerToUpdate.amount.set(value);
+      else if (propName === 'selectedAgentId') billerToUpdate.selectedAgentId = parseInt(value);
+      else billerToUpdate[propName] = value;
       console.log(inputValues)
     },
     reset,

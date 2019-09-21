@@ -1,8 +1,9 @@
+import { getFontSize } from '../style';
+
 export default function(sizeRatio) {
-  if (!sizeRatio) sizeRatio = 1;
 
   const fontSize = {
-    fontSize: `${sizeRatio}rem`
+    fontSize: getFontSize(sizeRatio)
   };
   const selectInput = {
     width: '100%',

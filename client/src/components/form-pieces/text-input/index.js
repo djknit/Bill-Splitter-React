@@ -5,15 +5,13 @@ import BoxInputFrame from '../box-input-frame';
 
 function TextInput({
   inputRef,
-  label,
-  sublabel,
   placeholder,
   value,
   handleChange,
-  isInline,
   formId,
   name,
-  sizeRatio
+  sizeRatio,
+  ...otherProps
 }) {
 
   requireProps({ value, handleChange, formId, name });
@@ -24,11 +22,9 @@ function TextInput({
 
   return (
     <BoxInputFrame
-      label={label}
-      sublabel={sublabel}
-      isInline={isInline}
       inputId={inputId}
       sizeRatio={sizeRatio}
+      {...otherProps}
     >
       <input
         id={inputId}

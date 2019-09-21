@@ -1,9 +1,9 @@
+import { getFontSize } from '../style';
+
 export default function(sizeRatio) {
 
-  if (!sizeRatio) sizeRatio = 1;
-  
   const label = {
-    fontSize: `${sizeRatio}rem`
+    fontSize: getFontSize(sizeRatio)
   }
 
   return {

@@ -1,11 +1,13 @@
 import { notificationTitle } from '../../../modal-skeleton/style';
 
+const divider = {
+  margin: '10px 0'
+}
+
 // styles for this component (NewBillForm)
 export default {
   notificationTitle,
-  divider: {
-    margin: '10px 0'
-  }
+  divider
 };
 
 // Styles used by multiple child components
@@ -26,5 +28,6 @@ const subsectionContainer = {
 export {
   normalWeight,
   sectionSubdividerFirst,
+  divider,
   subsectionContainer
 };
