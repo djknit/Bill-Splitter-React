@@ -9,13 +9,15 @@ function BoxInputFrame({
   sizeRatio,
   children,
   hasIcon,
-  controlStyle
+  controlStyle,
+  hasSmallMargins,
+  isLastChild
 }) {
 
   // no need for inline when there is no label
   if (label === undefined) isInline = false;
 
-  const style = getStyle(sizeRatio);
+  const style = getStyle(sizeRatio, hasSmallMargins, isLastChild);
 
   function Label() {
     return label ? (
@@ -38,7 +40,7 @@ function BoxInputFrame({
 
   return isInline ?
     (
-      <div className="field is-horizontal">
+      <div className="field is-horizontal" style={style.field}>
         <div className="field-label is-normal" style={style.fieldLabel}>
           <Label />
         </div>
@@ -52,7 +54,7 @@ function BoxInputFrame({
       </div>
     ) :
     (
-      <div className="field">
+      <div className="field" style={style.field}>
         <Label />
         <Control hasIcon={hasIcon} style={controlStyle}>
           {children}

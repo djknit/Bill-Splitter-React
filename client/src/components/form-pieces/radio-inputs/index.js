@@ -6,15 +6,17 @@ function RadioInputs({
   selectedValue,
   options,
   handleChange,
-  sizeRatio
+  sizeRatio,
+  hasSmallMargins,
+  isLastChild
 }) {
 
   requireProps({ selectedValue, options, handleChange });
 
-  const style = getStyle(sizeRatio);
+  const style = getStyle(sizeRatio, hasSmallMargins, isLastChild);
 
   return (
-    <div className="field">
+    <div className="field" style={style.field}>
       <div className="control">
 
         {options.map((option, index) => {

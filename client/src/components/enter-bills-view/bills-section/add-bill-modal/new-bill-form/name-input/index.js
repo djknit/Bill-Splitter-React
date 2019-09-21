@@ -45,22 +45,8 @@ class NameInput extends Component {
         handleChange={this.handleChange}
         formId={formId}
         name="name"
+        hasSmallMargins
       />
-      // <div className="field">
-      //   <label htmlFor={inputId} className="label">
-      //     Bill Name <span style={style.normalWeight}>(Optional)</span>
-      //   </label>
-      //   <div className="control">
-      //     <input
-      //       id={inputId}
-      //       ref={inputRef}
-      //       className="input"
-      //       placeholder="Give the bill a nickname..."
-      //       onChange={this.handleChange}
-      //       value={inputValue}
-      //     />
-      //   </div>
-      // </div>
     );
   }
 }

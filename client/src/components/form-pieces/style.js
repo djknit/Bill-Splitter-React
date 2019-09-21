@@ -4,4 +4,17 @@ function getFontSize(sizeRatio) {
   return `${sizeRatio}rem`;
 }
 
-export { getFontSize };
+function getMargins(hasSmallMargins, isLastChild) {
+  return {
+    field: {
+      marginBottom: (hasSmallMargins && !isLastChild) ?
+        '.3em' :
+        undefined
+    },
+    label: {
+      marginBottom: hasSmallMargins ? '.2em' : undefined
+    }
+  };
+}
+
+export { getFontSize, getMargins };

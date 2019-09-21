@@ -4,14 +4,18 @@ import {
   subsectionContainer
 } from '../style';
 
+import { getMargins, getFontSize } from '../../../../../form-pieces/style';
+
+const { label } = getMargins(true);
+
 export default {
   normalWeight,
   sectionSubdividerFirst,
-  subsectionContainer
+  subsectionContainer,
+  label
 };
 
 function getNameInputStyles(sizeRatio) {
-  if (!sizeRatio) sizeRatio = 1;
 
   const selectInput = {
     width: '100%'
@@ -22,7 +26,8 @@ function getNameInputStyles(sizeRatio) {
 
   return {
     legend: {
-      fontSize: `${sizeRatio}rem`
+      fontSize: getFontSize(sizeRatio),
+      ...label
     },
     selectInputDiv: {
       display: 'block'

@@ -9,7 +9,7 @@ export default function getStyle(sizeRatio) {
     display: 'inline-block',
     position: 'absolute',
     right: 0,
-    bottom: -2,
+    bottom: 0,
     width: '50%',
     padding: '.375rem .75rem 0',
     fontSize: '2rem',
@@ -36,6 +36,9 @@ export default function getStyle(sizeRatio) {
     },
     control: {
       position: 'relative'
+    },
+    icon: {
+      fontSize
     }
   }
 }

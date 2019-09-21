@@ -1,7 +1,7 @@
 import { notificationTitle } from '../../../modal-skeleton/style';
 
 const divider = {
-  margin: '10px 0'
+  margin: '8px 0'
 }
 
 // styles for this component (NewBillForm)

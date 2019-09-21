@@ -1,6 +1,6 @@
 import React from 'react';
 import getStyle from './style';
-import { TextInput, RadioInputs, SelectInput } from '../../../../../../../form-pieces';
+import { TextInput, RadioInputs, SelectInput, AmountInput } from '../../../../../../../form-pieces';
 
 function BillerMultInput({
   index,
@@ -15,7 +15,8 @@ function BillerMultInput({
     typeOrSelect,
     typed,
     selectedAgentId,
-    options
+    options,
+    amount
   } = inputValue;
   const showSelect = options.length !== 0 && typeOrSelect === 'select';
   const NameInput = showSelect ? SelectInput : TextInput;
@@ -46,57 +47,39 @@ function BillerMultInput({
               selectedValue={typeOrSelect}
               handleChange={(value) => updateData('typeOrSelect', value)}
               sizeRatio={sizeRatio}
+              hasSmallMargins
             />
           )
         }
-        {
-          <NameInput
-            placeholder={showSelect ?
-              "Select biller name" :
-              "Name of business or person the bill is paid to..."
-            }
-            label="Name"
-            value={showSelect ? selectedAgentId : typed}
-            formId={formId}
-            name={`biller-single-name-${showSelect ? 'select' : 'type'}`}
-            handleChange={value =>
-              updateData(
-                showSelect ? 'selectedAgentId' : 'typed',
-                value
-              )
-            }
-            sizeRatio={sizeRatio}
-            isInline
-            options={showSelect ? options : undefined}
-          />
-        }
-        {/* {
-          (options.length === 0 || typeOrSelect === 'type') ?
-            (
-              <TextInput
-                placeholder="Name of business or person the bill is paid to..."
-                value={typed}
-                formId={formId}
-                name="biller-single-name-typed"
-                handleChange={(value) => updateData('typed', value)}
-                sizeRatio={sizeRatio}
-                isInline
-                label="Name"
-              />
-            ) : (
-              <SelectInput
-                placeholder="Select biller name"
-                options={options}
-                value={selectedAgentId}
-                handleChange={value => updateData('selectedAgentId', value)}
-                sizeRatio={sizeRatio}
-                isInline
-                label="Name"
-                formId={formId}
-                name="biller-single-name-select"
-              />
+        <NameInput
+          placeholder={showSelect ?
+            "Select biller name" :
+            "Name of business or person the bill is paid to..."
+          }
+          label="Name"
+          value={showSelect ? selectedAgentId : typed}
+          formId={formId}
+          name={`biller-mult-${index}-name-${showSelect ? 'select' : 'type'}`}
+          handleChange={value =>
+            updateData(
+              showSelect ? 'selectedAgentId' : 'typed',
+              value
             )
-        } */}
+          }
+          sizeRatio={sizeRatio}
+          isInline
+          options={showSelect ? options : undefined}
+          hasSmallMargins
+        />
+        <AmountInput
+          value={amount}
+          handleChange={value => updateData('amount', value)}
+          formId={formId}
+          name={`biller-mult-${index}-amount`}
+          label="Amount"
+          sizeRatio={sizeRatio}
+          isInline
+        />
       </fieldset>
     </>
   );

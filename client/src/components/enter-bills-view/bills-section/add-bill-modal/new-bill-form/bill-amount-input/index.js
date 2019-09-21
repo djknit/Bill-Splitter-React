@@ -38,35 +38,8 @@ class BillAmountInput extends Component {
         name="amount"
         label="Bill Total"
         sublabel="US Dollars"
+        hasSmallMargins
       />
-      // <div className="field" style={style.field}>
-      //   <label htmlFor={inputId} className="label">
-      //     Bill Total <span style={style.normalWeight}>(US Dollars)</span>
-      //   </label>
-      //   <div className="control has-icons-left">
-      //     <input
-      //       id={inputId}
-      //       className="input"
-      //       type="number"
-      //       style={style.input}
-      //       value={dataValues.raw}
-      //       onChange={this.handleChange}
-      //     />
-      //     <span className="icon is-left">$</span>
-      //   </div>
-      //   {
-      //     (dataValues.display === 'negative' && (
-      //       <div style={style.amountDisplayNegative}>
-      //         Negative values are not allowed
-      //       </div>
-      //     )) || (dataValues.display !== null && (
-      //       <div style={style.amountDisplay}>
-      //         $ {dataValues.display}
-      //       </div>
-      //     ))
-      //   }
-      // </div>
-
     );
   }
 }

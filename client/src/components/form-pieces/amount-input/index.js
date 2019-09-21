@@ -9,7 +9,10 @@ function AmountInput({
   name,
   sizeRatio,
   label,
-  sublabel
+  sublabel,
+  isInline,
+  hasSmallMargins,
+  isLastChild
 }) {
 
   const inputId = `${formId}-${name}-in`;
@@ -23,6 +26,10 @@ function AmountInput({
       inputId={inputId}
       label={label}
       sublabel={sublabel}
+      isInline={isInline}
+      sizeRatio={sizeRatio}
+      hasSmallMargins={hasSmallMargins}
+      isLastChild={isLastChild}
     >
       <input
         id={inputId}
@@ -32,7 +39,7 @@ function AmountInput({
         value={value.raw}
         onChange={({ target }) => handleChange(target.value)}
       />
-      <span className="icon is-left">$</span>
+      <span className="icon is-left" style={style.icon}>$</span>
       {
         (value.display === 'negative' && (
           <div style={style.amountDisplayNegative}>

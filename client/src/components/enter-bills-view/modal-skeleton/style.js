@@ -5,6 +5,9 @@ export default function({ theme, padding }) {
   };
 
   return {
+    card: {
+      minWidth: 320
+    },
     header: theme ?
       {
         backgroundColor: (theme === 'success' && '#23d160') ||

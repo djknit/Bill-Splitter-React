@@ -14,7 +14,9 @@ function SelectInput({
   isInline,
   formId,
   name,
-  sizeRatio
+  sizeRatio,
+  hasSmallMargins,
+  isLastChild
 }) {
 
   // requireProps(label ? { handleChange, formId, name } : { handleChange });
@@ -32,6 +34,8 @@ function SelectInput({
       isInline={isInline}
       inputId={inputId}
       sizeRatio={sizeRatio}
+      hasSmallMargins={hasSmallMargins}
+      isLastChild={isLastChild}
     >
       <div className="select" style={style.selectInputDiv}>
         <select

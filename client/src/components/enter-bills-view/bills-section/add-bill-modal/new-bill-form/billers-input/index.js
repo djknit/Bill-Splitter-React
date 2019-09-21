@@ -36,7 +36,7 @@ class BillersInput extends Component {
 
     return (
       <fieldset>
-        <legend className="label">
+        <legend className="label" style={style.label}>
           Biller <span style={style.normalWeight}>(Who is this bill paid to?)</span>
         </legend>
         <RadioInputs
@@ -51,6 +51,7 @@ class BillersInput extends Component {
             }
           ]}
           handleChange={oneOrMoreBillersService.update}
+          hasSmallMargins
         />
         <hr style={style.sectionSubdividerFirst} />
         <div style={style.subsectionContainer}>

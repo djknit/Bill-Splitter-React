@@ -62,6 +62,7 @@ class BillerSingleInput extends Component {
               selectedValue={typeOrSelect}
               handleChange={(value) => updateData('typeOrSelect', value)}
               sizeRatio={sizeRatio}
+              hasSmallMargins
             />
           )
         }

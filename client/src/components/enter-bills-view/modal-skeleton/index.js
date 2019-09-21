@@ -25,7 +25,7 @@ function ModalSkeleton({
   return (
     <div className={`modal${isActive ? ' is-active' : ''}`}>
       <div className="modal-background"></div>
-      <div className="modal-card">
+      <div className="modal-card" style={style.card}>
         <header className="modal-card-head" style={style.header}>
           <p className="modal-card-title" style={style.title}>
             {title}
