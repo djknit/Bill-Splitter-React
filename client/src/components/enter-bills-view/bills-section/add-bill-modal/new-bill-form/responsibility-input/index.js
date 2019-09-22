@@ -8,13 +8,13 @@ class ResponsibilityInput extends Component {
     this.reportChange = this.reportChange.bind(this);
     this.reset = this.reset.bind(this);
     this.state = {
-      inputValue: {}
+      inputValues: dataService.getValue()
     }
   }
 
   getInputValue() {
     this.setState({
-      inputValue: dataService.getValue()
+      inputValues: dataService.getValue()
     });
   }
 

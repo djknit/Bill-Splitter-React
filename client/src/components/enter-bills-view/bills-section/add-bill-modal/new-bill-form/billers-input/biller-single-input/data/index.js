@@ -37,8 +37,7 @@ let dataService = DataServiceFactory({
       inputValue[propName] = value;
       console.log(inputValue)
     },
-    reset,
-    _emit() {}
+    reset
   },
   isAsync: false
 });

@@ -2,10 +2,10 @@ import { DataServiceFactory, AmountValueStoreFactory } from '../../../../../../.
 import { agentsService } from '../../../../../../data/entities';
 
 let agents = [];
-updateAgents();
-agentsService.subscribe(updateAgents);
+getAgents();
+agentsService.subscribe(getAgents);
 
-function updateAgents() {
+function getAgents() {
   agentsService
     .getValue()
     .then(_agents => {
@@ -70,14 +70,19 @@ let dataService = DataServiceFactory({
   },
   methods: {
     update(index, propName, value) {
-      const billerToUpdate =inputValues[index];
+      const billerToUpdate = inputValues[index];
       if (propName === 'amount') billerToUpdate.amount.set(value);
       else if (propName === 'selectedAgentId') billerToUpdate.selectedAgentId = parseInt(value);
       else billerToUpdate[propName] = value;
-      console.log(inputValues)
     },
-    reset,
-    _emit() {}
+    removeInput(index) {
+      inputValues.splice(index, 1);
+    },
+    addInput() {
+      console.log('add input')
+      addInput();
+    },
+    reset
   },
   isAsync: false
 });

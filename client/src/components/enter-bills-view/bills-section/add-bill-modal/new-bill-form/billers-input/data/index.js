@@ -26,7 +26,6 @@ let oneOrMoreBillersService = DataServiceFactory({
       console.log(value)
       inputValue.oneOrMoreBillers = value;
     },
-    _emit() {console.log('emit billers-input-data')},
     reset() {
       inputValue.oneOrMoreBillers = 'one';
     }
@@ -39,8 +38,7 @@ let billersDataService = DataServiceFactory({
     return { ...inputValue };
   },
   methods: {
-    reset,
-    _emit() {}
+    reset
   },
   isAsync: false
 });

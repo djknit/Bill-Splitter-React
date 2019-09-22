@@ -20,6 +20,9 @@ export default function DataServiceFactory({
     },
     unsub(callback) {
       emitter.removeListener('change', callback);
+    },
+    _emit() {
+      emitter.emit('change');
     }
   };
 

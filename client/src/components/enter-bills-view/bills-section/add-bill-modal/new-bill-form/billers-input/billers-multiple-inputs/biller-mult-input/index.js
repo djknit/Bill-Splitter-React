@@ -7,7 +7,8 @@ function BillerMultInput({
   inputValue,
   formId,
   sizeRatio,
-  updateData
+  updateData,
+  removeInput
 }) {
 
   const style = getStyle(sizeRatio);
@@ -28,10 +29,18 @@ function BillerMultInput({
           <hr style={style.divider} />
         )
       }
-      <fieldset>
+      <fieldset style={style.fieldset}>
         <legend className="label" style={style.legend}>
           Biller {index + 1}
         </legend>
+        <span
+          className="button is-danger is-small"
+          style={style.removeBtn}
+          onClick={removeInput}
+        >
+          <span className="delete is-small"></span>
+          &nbsp;Remove
+        </span>
         {
           options.length > 0 && (
             <RadioInputs

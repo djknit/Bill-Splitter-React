@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import dataService from './data';
+import getStyle from './style';
 import { TextInput, RadioInputs, SelectInput } from '../../../../../../form-pieces';
 import BillerMultInput from './biller-mult-input';
 
@@ -33,7 +34,7 @@ class BillersMultipleInputs extends Component {
       formId,
       sizeRatio
     } = this.props;
-    const updateData = dataService.update;
+    const style = getStyle(sizeRatio);
 
     return (
       <fieldset>
@@ -45,12 +46,17 @@ class BillersMultipleInputs extends Component {
                 inputValue={inputValue}
                 formId={formId}
                 sizeRatio={sizeRatio}
-                updateData={(propName, value) => updateData(index, propName, value)}
+                updateData={(propName, value) => dataService.update(index, propName, value)}
                 key={inputValue.inputId}
+                removeInput={() => dataService.removeInput(index)}
               />
             )
           )
         }
+        <hr style={style.divider} />
+        <span className="button is-info" style={style.addInputBtn} onClick={dataService.addInput}>
+          <span style={style.btnPlus}>+</span> Add Biller
+        </span>
       </fieldset>
     );
   }
