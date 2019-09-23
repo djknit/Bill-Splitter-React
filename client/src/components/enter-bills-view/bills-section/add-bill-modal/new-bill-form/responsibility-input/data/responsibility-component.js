@@ -11,7 +11,7 @@ reset();
 
 function reset() {
   inputValue = {
-    splittingMethod: 'evenlyBetweenAll',
+    splittingMethod: 'allEvenly',
     allEvenlyAmountPerPerson: AmountValueStoreFactory()
   }
 }

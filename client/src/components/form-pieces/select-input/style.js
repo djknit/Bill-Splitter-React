@@ -1,4 +1,4 @@
-import { getFontSize } from '../style';
+import { getFontSize, selectionColor } from '../style';
 
 export default function(sizeRatio) {
 
@@ -18,7 +18,10 @@ export default function(sizeRatio) {
       display: 'block',
       ...fontSize
     },
-    selectInput,
+    selectInput: {
+      ...selectInput,
+      color: selectionColor
+    },
     selectInputNoSelection: {
       ...lightGrayText,
       ...selectInput

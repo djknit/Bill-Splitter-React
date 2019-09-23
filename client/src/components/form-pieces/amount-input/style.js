@@ -1,4 +1,4 @@
-import { getFontSize } from '../style';
+import { getFontSize, selectionColor } from '../style';
 
 export default function getStyle(sizeRatio) {
   if (!sizeRatio) sizeRatio = 1;
@@ -20,7 +20,7 @@ export default function getStyle(sizeRatio) {
   
   return {
     amountDisplay: {
-      color: '#495057',
+      color: selectionColor,
       ...displays,
       fontSize: getFontSize(sizeRatio * 1.6)
     },
@@ -32,7 +32,8 @@ export default function getStyle(sizeRatio) {
     input: {
       fontSize,
       display: 'inline-block',
-      width: 'calc(50% - 20px)'
+      width: 'calc(50% - 20px)',
+      color: selectionColor
     },
     control: {
       position: 'relative'
