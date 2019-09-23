@@ -38,7 +38,7 @@ class IsPaidInput extends Component {
   render() {
     return (
       <div className="field">
-        <label htmlFor="" className="label"></label>
+        <label htmlFor="" className="label">Is Paid</label>
         <div className="control">
           <input id="" className="input" type="text" />
         </div>

@@ -36,9 +36,6 @@ class BillersInput extends Component {
 
     return (
       <fieldset>
-        {/* <legend className="label" style={style.label}>
-          Biller <span style={style.normalWeight}>(Who is this bill paid to?)</span>
-        </legend> */}
         <Legend
           label="Biller"
           sublabel="Who is this bill paid to?"

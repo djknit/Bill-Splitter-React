@@ -56,7 +56,7 @@ class NewBillForm extends Component {
           <Divider />
           <BillersInput formId={formId} />
           <Divider />
-          <ResponsibilityInput />
+          <ResponsibilityInput formId={formId} />
           <Divider />
           {/* <IsPaidInput /> */}
         </form>

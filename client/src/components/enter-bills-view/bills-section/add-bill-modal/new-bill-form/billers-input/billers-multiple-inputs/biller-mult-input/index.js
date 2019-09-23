@@ -1,6 +1,8 @@
 import React from 'react';
 import getStyle from './style';
-import { TextInput, RadioInputs, SelectInput, AmountInput } from '../../../../../../../form-pieces';
+import
+  { TextInput, RadioInputs, SelectInput, AmountInput, Legend }
+  from '../../../../../../../form-pieces';
 
 function BillerMultInput({
   index,
@@ -30,9 +32,11 @@ function BillerMultInput({
         )
       }
       <fieldset style={style.fieldset}>
-        <legend className="label" style={style.legend}>
-          Biller {index + 1}
-        </legend>
+        <Legend
+          label={`Biller ${index + 1}`}
+          hasSmallMargins
+          sizeRatio={sizeRatio}
+        />
         <span
           className="button is-danger is-small"
           style={style.removeBtn}

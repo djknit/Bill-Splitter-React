@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import dataService from './data';
-import style from './style';
 import { AmountInput } from '../../../../../form-pieces';
 
 class BillAmountInput extends Component {

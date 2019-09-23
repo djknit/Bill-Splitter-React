@@ -18,5 +18,3 @@ let dataService = DataServiceFactory({
 });
 
 export default dataService;
-
-// export { generateAmountValueStore }; 

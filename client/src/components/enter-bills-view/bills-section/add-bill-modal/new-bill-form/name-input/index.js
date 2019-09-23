@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import dataService from './data';
-// import style from './style';
 import TextInput from '../../../../../form-pieces/text-input';
 
 class NameInput extends Component {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import getStyle from './style';
 import dataService from './data';
 import { TextInput, RadioInputs, SelectInput, Legend } from '../../../../../../form-pieces';
 
@@ -33,7 +32,6 @@ class BillerSingleInput extends Component {
       formId,
       sizeRatio
     } = this.props;
-    const style = getStyle(sizeRatio);
     const {
       typeOrSelect,
       typed,
