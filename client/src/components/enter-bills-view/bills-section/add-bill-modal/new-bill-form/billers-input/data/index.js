@@ -8,8 +8,12 @@ let inputValue = {
   billersMultiple: billersMultipleService.getValue()
 };
 
-billerSingleService.subscribe(value => inputValue.billerSingle = value);
-billersMultipleService.subscribe(value => inputValue.billersMultiple = value);
+billerSingleService.subscribe(function() {
+  inputValue.billerSingle = billerSingleService.getValue()
+});
+billersMultipleService.subscribe(function() {
+  inputValue.billersMultiple = billersMultipleService.getValue()
+});
 
 function reset() {
   oneOrMoreBillersService.reset();

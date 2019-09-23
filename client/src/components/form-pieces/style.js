@@ -17,4 +17,10 @@ function getMargins(hasSmallMargins, isLastChild) {
   };
 }
 
-export { getFontSize, getMargins };
+const normalWeight = {
+  get fontWeight() {
+    return 'normal';
+  }
+};
+
+export { getFontSize, getMargins, normalWeight };

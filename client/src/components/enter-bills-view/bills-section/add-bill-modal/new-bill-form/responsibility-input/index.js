@@ -1,29 +1,19 @@
 import React, { Component } from 'react';
-import dataService from './data';
+import { splittingMethodAndAllEvenlyAmountService as dataService } from './data';
 
 class ResponsibilityInput extends Component {
   constructor() {
     super();
     this.getInputValue = this.getInputValue.bind(this);
-    this.reportChange = this.reportChange.bind(this);
-    this.reset = this.reset.bind(this);
     this.state = {
-      inputValues: dataService.getValue()
+      inputValue: dataService.getValue()
     }
   }
 
   getInputValue() {
     this.setState({
-      inputValues: dataService.getValue()
+      inputValue: dataService.getValue()
     });
-  }
-
-  reportChange() {
-
-  }
-
-  reset() {
-
   }
 
   componentDidMount() {
@@ -37,12 +27,9 @@ class ResponsibilityInput extends Component {
 
   render() {
     return (
-      <div className="field">
-        <label htmlFor="" className="label">Responsible Participants</label>
-        <div className="control">
-          <input id="" className="input" type="text" />
-        </div>
-      </div>
+      <fieldset>
+        ResponsibilityInput
+      </fieldset>
     );
   }
 }

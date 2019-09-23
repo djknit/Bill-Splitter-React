@@ -1,44 +1,39 @@
-import { DataServiceFactory } from '../../../../../../../utilities';
-import { participantsService } from '../../../../../data/entities';
-import billAmountService from '../../bill-amount-input';
+import { DataServiceFactory, AmountValueStoreFactory } from '../../../../../../../utilities';
+import splittingMethodAndAllEvenlyAmountService from './responsibility-component';
+import someEvenlyService from '../some-evenly-inputs/data';
+import individuallyService from '../individually-inputs/data';
 
-let participants = [];
-getParticipants();
-participantsService.subscribe(getParticipants);
-
-function getParticipants() {
-  participantsService
-    .getValue()
-    .then(_participants => {
-      participants = _participants;
-      dataService._emit();
-    });
-}
-
-let billTotal = billAmountService.getValue().rounded;
-billAmountService.subscribe(function getBillTotal() {
-  billTotal = billAmountService.getValue().rounded;
-});
-
-let inputValue, nextSomeEvenlyInputId, nextIndividuallyInputId;
-reset();
-
-function reset() {
-  nextSomeEvenlyInputId = 0;
-  nextIndividuallyInputId = 0;
-  inputValue = {
-    splittingMethod: 'evenlyBetweenAll'
-  }
-}
-
-let dataService = DataServiceFactory({
+let responsibilityService = DataServiceFactory({
   readFunction() {
-    return Object.assign({}, inputValue);
+    const {
+      splittingMethod,
+      allEvenlyAmountPerPerson
+    } = splittingMethodAndAllEvenlyAmountService.getValue();
+    return {
+      splittingMethod,
+      someEvenly: someEvenlyService.getValue(),
+      individually: individuallyService.getValue(),
+      allEvenlyAmountPerPerson
+    };
   },
   methods: {
-    update() {
-      
+    reset() {
+      splittingMethodAndAllEvenlyAmountService.reset();
+      someEvenlyService.reset();
+      individuallyService.reset();
     }
   },
   isAsync: false
 });
+
+splittingMethodAndAllEvenlyAmountService.subscribe(responsibilityService._emit);
+someEvenlyService.subscribe(responsibilityService._emit);
+individuallyService.subscribe(responsibilityService._emit);
+
+export default responsibilityService;
+
+export {
+  splittingMethodAndAllEvenlyAmountService,
+  someEvenlyService,
+  individuallyService
+};

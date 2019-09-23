@@ -1,5 +1,3 @@
-import { normalWeight } from '../style';
-
 const amountDisplay = function() {
   return {
     display: 'inline-block',
@@ -16,7 +14,6 @@ const amountDisplay = function() {
 }
 
 export default {
-  normalWeight,
   field: {
     position: 'relative'
   },

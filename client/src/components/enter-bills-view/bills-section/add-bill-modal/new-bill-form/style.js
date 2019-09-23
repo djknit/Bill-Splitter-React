@@ -10,11 +10,6 @@ export default {
   divider
 };
 
-// Styles used by multiple child components
-const normalWeight = {
-  fontWeight: 'normal'
-};
-
 // for <hr> that divides radio field from other fields in section (for billers and responsible participants sections)
 const sectionSubdividerFirst = {
   margin: '5px 0 5px 15px'
@@ -26,7 +21,6 @@ const subsectionContainer = {
 }
 
 export {
-  normalWeight,
   sectionSubdividerFirst,
   divider,
   subsectionContainer

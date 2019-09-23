@@ -8,7 +8,7 @@ class IndividuallyInputs extends Component {
   render() {
 
     return (
-      <fieldset></fieldset>
+      <fieldset>individually</fieldset>
     );
   }
 }

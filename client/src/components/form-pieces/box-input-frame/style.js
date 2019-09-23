@@ -1,4 +1,6 @@
-import { getFontSize, getMargins } from '../style';
+import { getFontSize, getMargins, normalWeight } from '../style';
+
+const { fontWeight } = normalWeight;
 
 export default function(sizeRatio, hasSmallMargins, isLastChild) {
 
@@ -9,7 +11,7 @@ export default function(sizeRatio, hasSmallMargins, isLastChild) {
       ...field
     },
     normalWeight: {
-      fontWeight: 'normal'
+      ...normalWeight
     },
     label: {
       fontSize: getFontSize(sizeRatio),

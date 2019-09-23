@@ -3,7 +3,7 @@ import style from './style';
 import NameInput from './name-input';
 import AmountInput from './bill-amount-input';
 import BillersInput from './billers-input';
-// import ResponsibilityInput from './responsibility-input';
+import ResponsibilityInput from './responsibility-input';
 // import IsPaidInput from './is-paid-input';
 
 class NewBillForm extends Component {
@@ -55,8 +55,10 @@ class NewBillForm extends Component {
           <AmountInput formId={formId} />
           <Divider />
           <BillersInput formId={formId} />
-          {/* <ResponsibilityInput />
-          <IsPaidInput /> */}
+          <Divider />
+          <ResponsibilityInput />
+          <Divider />
+          {/* <IsPaidInput /> */}
         </form>
       </>
     );

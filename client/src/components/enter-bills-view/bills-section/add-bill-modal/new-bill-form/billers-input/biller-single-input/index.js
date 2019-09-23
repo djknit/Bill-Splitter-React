@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import getStyle from './style';
 import dataService from './data';
-import { TextInput, RadioInputs, SelectInput } from '../../../../../../form-pieces';
+import { TextInput, RadioInputs, SelectInput, Legend } from '../../../../../../form-pieces';
 
 class BillerSingleInput extends Component {
   constructor(props) {
@@ -44,9 +44,11 @@ class BillerSingleInput extends Component {
 
     return (
       <fieldset>
-        <legend className="label" style={style.legend}>
-          Biller Name
-        </legend>
+        <Legend
+          label="Biller Name"
+          hasSmallMargins
+          sizeRatio={sizeRatio}
+        />
         {
           inputValue.options.length > 0 && (
             <RadioInputs

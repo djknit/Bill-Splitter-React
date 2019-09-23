@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { oneOrMoreBillersService } from './data';
 import style from './style';
-import { RadioInputs } from '../../../../../form-pieces';
+import { RadioInputs, Legend } from '../../../../../form-pieces';
 import BillerSingleInput from './biller-single-input';
 import BillersMultipleInputs from './billers-multiple-inputs';
 
@@ -36,9 +36,14 @@ class BillersInput extends Component {
 
     return (
       <fieldset>
-        <legend className="label" style={style.label}>
+        {/* <legend className="label" style={style.label}>
           Biller <span style={style.normalWeight}>(Who is this bill paid to?)</span>
-        </legend>
+        </legend> */}
+        <Legend
+          label="Biller"
+          sublabel="Who is this bill paid to?"
+          hasSmallMargins
+        />
         <RadioInputs
           selectedValue={oneOrMoreBillersValue}
           options={[
