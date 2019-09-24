@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import dataService from './data';
+import { Legend, RadioInputs } from '../../../../../form-pieces'
 
 class IsPaidInput extends Component {
   constructor() {
     super();
     this.getInputValue = this.getInputValue.bind(this);
-    this.reportChange = this.reportChange.bind(this);
-    this.reset = this.reset.bind(this);
     this.state = {
-      inputValue: {}
+      inputValue: dataService.getValue()
     }
   }
 
@@ -16,14 +15,6 @@ class IsPaidInput extends Component {
     this.setState({
       inputValue: dataService.getValue()
     });
-  }
-
-  reportChange() {
-
-  }
-
-  reset() {
-
   }
 
   componentDidMount() {
@@ -36,13 +27,30 @@ class IsPaidInput extends Component {
   }
 
   render() {
+    const { formId } = this.props;
+    const { inputValue } = this.state;
+
     return (
-      <div className="field">
-        <label htmlFor="" className="label">Is Paid</label>
-        <div className="control">
-          <input id="" className="input" type="text" />
-        </div>
-      </div>
+      <fieldset>
+        <Legend
+          label="Has this bill been paid?"
+          hasSmallMargins
+        />
+        <RadioInputs
+          selectedValue={inputValue}
+          options={[
+            {
+              value: true,
+              label: 'Yes'
+            }, {
+              value: false,
+              label: 'No'
+            }
+          ]}
+          handleChange={value => dataService.update(value)}
+          hasSmallMargins
+        />
+      </fieldset>
     );
   }
 }

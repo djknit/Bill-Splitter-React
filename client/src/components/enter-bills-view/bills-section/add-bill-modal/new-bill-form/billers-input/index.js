@@ -29,10 +29,8 @@ class BillersInput extends Component {
   }
 
   render() {
-    const { formId } = this.props;
+    const { formId, subsectionSizeRatio } = this.props;
     const { oneOrMoreBillersValue } = this.state;
-
-    const subSectionSizeRatio = .9;
 
     return (
       <fieldset>
@@ -61,12 +59,12 @@ class BillersInput extends Component {
             oneOrMoreBillersValue === 'one' ?
               <BillerSingleInput
                 formId={formId}
-                sizeRatio={subSectionSizeRatio}
+                sizeRatio={subsectionSizeRatio}
               />
               :
               <BillersMultipleInputs
                 formId={formId}
-                sizeRatio={subSectionSizeRatio}
+                sizeRatio={subsectionSizeRatio}
               />
           }
         </div>

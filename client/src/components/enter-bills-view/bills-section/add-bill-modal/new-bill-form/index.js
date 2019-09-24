@@ -4,7 +4,7 @@ import NameInput from './name-input';
 import AmountInput from './bill-amount-input';
 import BillersInput from './billers-input';
 import ResponsibilityInput from './responsibility-input';
-// import IsPaidInput from './is-paid-input';
+import IsPaidInput from './is-paid-input';
 
 class NewBillForm extends Component {
   constructor(props) {
@@ -25,6 +25,7 @@ class NewBillForm extends Component {
       errorMessage,
       inputRef
     } = this.props;
+    const subsectionSizeRatio = .9;
 
     return (
       <>
@@ -54,11 +55,11 @@ class NewBillForm extends Component {
           <Divider />
           <AmountInput formId={formId} />
           <Divider />
-          <BillersInput formId={formId} />
+          <BillersInput formId={formId} subsectionSizeRatio={subsectionSizeRatio} />
           <Divider />
-          <ResponsibilityInput formId={formId} />
+          <ResponsibilityInput formId={formId} subsectionSizeRatio={subsectionSizeRatio} />
           <Divider />
-          {/* <IsPaidInput /> */}
+          <IsPaidInput formId={formId} />
         </form>
       </>
     );

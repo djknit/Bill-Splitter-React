@@ -25,4 +25,6 @@ const normalWeight = {
 
 const selectionColor = '#0f0f0f';
 
-export { getFontSize, getMargins, normalWeight, selectionColor };
+const optionColor = '#363636';
+
+export { getFontSize, getMargins, normalWeight, selectionColor, optionColor };

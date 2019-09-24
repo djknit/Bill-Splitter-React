@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import dataService from './data';
 import getStyle from './style';
-import { TextInput, RadioInputs, SelectInput } from '../../../../../../form-pieces';
 import BillerMultInput from './biller-mult-input';
 
 class BillersMultipleInputs extends Component {
@@ -28,7 +27,6 @@ class BillersMultipleInputs extends Component {
   }
 
   render() {
-
     const { inputValues } = this.state;
     const {
       formId,

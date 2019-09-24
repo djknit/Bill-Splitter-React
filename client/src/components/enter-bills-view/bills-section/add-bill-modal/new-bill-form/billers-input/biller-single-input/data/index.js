@@ -2,17 +2,6 @@ import DataServiceFactory from '../../../../../../../../utilities/data-service-f
 import { agentsService } from '../../../../../../data/entities';
 
 let agents = [];
-updateAgents();
-agentsService.subscribe(updateAgents);
-
-function updateAgents() {
-  agentsService
-    .getValue()
-    .then(_agents => {
-      agents = _agents;
-      dataService._emit();
-    });
-}
 
 let inputValue;
 reset();
@@ -43,3 +32,15 @@ let dataService = DataServiceFactory({
 });
 
 export default dataService;
+
+updateAgents();
+agentsService.subscribe(updateAgents);
+
+function updateAgents() {
+  agentsService
+    .getValue()
+    .then(_agents => {
+      agents = _agents;
+      dataService._emit();
+    });
+}

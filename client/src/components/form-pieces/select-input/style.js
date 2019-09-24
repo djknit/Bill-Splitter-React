@@ -1,4 +1,4 @@
-import { getFontSize, selectionColor } from '../style';
+import { getFontSize, selectionColor, optionColor } from '../style';
 
 export default function(sizeRatio) {
 
@@ -27,7 +27,7 @@ export default function(sizeRatio) {
       ...selectInput
     },
     option: {
-      color: '#363636',
+      color: optionColor,
       ...fontSize
     },
     optionDisabled: {

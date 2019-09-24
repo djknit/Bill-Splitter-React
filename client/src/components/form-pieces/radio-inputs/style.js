@@ -1,4 +1,4 @@
-import { getFontSize, getMargins, selectionColor } from '../style';
+import { getFontSize, getMargins, selectionColor, optionColor } from '../style';
 
 export default function(sizeRatio, hasSmallMargins, isLastChild) {
 
@@ -13,6 +13,9 @@ export default function(sizeRatio, hasSmallMargins, isLastChild) {
   const selected = {
     color: selectionColor
   };
+  const optionNotSelected = {
+    color: optionColor
+  };
 
   return {
     field: {
@@ -22,7 +25,8 @@ export default function(sizeRatio, hasSmallMargins, isLastChild) {
       marginRight: 6
     },
     radioLabel: {
-      ...label
+      ...label,
+      ...optionNotSelected
     },
     labelInlineNotLast: {
       ...label,

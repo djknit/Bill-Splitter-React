@@ -85,6 +85,7 @@ function BillerMultInput({
           hasSmallMargins
         />
         <AmountInput
+          placeholder="$ owed/paid to this biller"
           value={amount}
           handleChange={value => updateData('amount', value)}
           formId={formId}

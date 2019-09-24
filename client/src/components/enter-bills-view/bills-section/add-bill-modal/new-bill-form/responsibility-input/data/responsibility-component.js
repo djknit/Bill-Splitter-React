@@ -18,15 +18,25 @@ function reset() {
 
 let splittingMethodAndAllEvenlyAmountService = DataServiceFactory({
   readFunction() {
-    return { ...inputValue };
+    return {
+      splittingMethod: inputValue.splittingMethod,
+      allEvenlyAmountPerPerson: inputValue.allEvenlyAmountPerPerson.get(),
+      numberOfParticipants: participants.length
+    };
   },
   methods: {
     updateSplittingMethod(value) {
       inputValue.splittingMethod = value;
     },
     updateAllEvenlyAmountPerPerson() {
-      const billTotal = billAmountService.getValue().rounded;
-      inputValue.allEvenlyAmountPerPerson.set(billTotal / participants.length);
+      const billAmountValue = billAmountService.getValue()
+      const billTotal = billAmountValue.rounded;
+      if (billTotal !== null) {
+        inputValue.allEvenlyAmountPerPerson.set(billTotal / participants.length);
+      }
+      else {
+        inputValue.allEvenlyAmountPerPerson.set(billAmountValue.raw);
+      }
     }
   },
   isAsync: false

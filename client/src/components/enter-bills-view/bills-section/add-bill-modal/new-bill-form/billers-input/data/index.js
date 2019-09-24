@@ -8,13 +8,6 @@ let inputValue = {
   billersMultiple: billersMultipleService.getValue()
 };
 
-billerSingleService.subscribe(function() {
-  inputValue.billerSingle = billerSingleService.getValue()
-});
-billersMultipleService.subscribe(function() {
-  inputValue.billersMultiple = billersMultipleService.getValue()
-});
-
 function reset() {
   oneOrMoreBillersService.reset();
   billerSingleService.reset();
@@ -52,3 +45,12 @@ oneOrMoreBillersService.subscribe(() => billersDataService._emit());
 export default billersDataService;
 
 export { oneOrMoreBillersService };
+
+billerSingleService.subscribe(function() {
+  inputValue.billerSingle = billerSingleService.getValue();
+  billersDataService._emit();
+});
+billersMultipleService.subscribe(function() {
+  inputValue.billersMultiple = billersMultipleService.getValue();
+  billersDataService._emit();
+});

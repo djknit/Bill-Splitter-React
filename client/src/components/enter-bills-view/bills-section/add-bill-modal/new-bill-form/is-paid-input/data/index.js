@@ -1,17 +1,20 @@
 import DataServiceFactory from '../../../../../../../utilities/data-service-factory';
 
-let inputValue = {
-  
-};
+let isPaid = true;
 
 let dataService = DataServiceFactory({
   readFunction() {
-    return Object.assign({}, inputValue);
+    return isPaid;
   },
   methods: {
-    update() {
-      
+    update(value) {
+      isPaid = value ? true : false;
+    },
+    reset() {
+      isPaid = true;
     }
   },
   isAsync: false
 });
+
+export default dataService;
