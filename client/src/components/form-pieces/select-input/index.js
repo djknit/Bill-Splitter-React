@@ -1,6 +1,5 @@
 import React from 'react';
 import getStyle from './style';
-import { requireProps } from '../../../utilities';
 import BoxInputFrame from '../box-input-frame';
 
 function SelectInput({
@@ -18,8 +17,6 @@ function SelectInput({
   hasSmallMargins,
   isLastChild
 }) {
-
-  // requireProps(label ? { handleChange, formId, name } : { handleChange });
 
   const inputId = formId && name && `${formId}-${name}-in`;
 

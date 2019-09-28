@@ -2,20 +2,17 @@ import React, { Component } from 'react';
 import dataService from './data';
 import getStyle from './style';
 import SomeEvenlyInput from './some-evenly-input';
+import AmountPerPersonDisplay from '../amount-per-person-display';
 
 class SomeEvenlyInputs extends Component {
   constructor(props) {
     super(props);
     this.getInputValues = this.getInputValues.bind(this);
-    this.state = {
-      inputValues: dataService.getValue()
-    };
+    this.state = dataService.getValue();
   }
 
   getInputValues() {
-    this.setState({
-      inputValues: dataService.getValue()
-    });
+    this.setState(dataService.getValue());
   }
 
   componentDidMount() {
@@ -27,7 +24,11 @@ class SomeEvenlyInputs extends Component {
   }
 
   render() {
-    const { inputValues } = this.state;
+    const {
+      inputValues,
+      isAddPButtonDisabled,
+      amountPerPerson
+    } = this.state;
     const {
       formId,
       sizeRatio
@@ -52,9 +53,19 @@ class SomeEvenlyInputs extends Component {
           )
         }
         <hr style={style.divider} />
-        <span className="button is-info" style={style.addInputBtn} onClick={dataService.addInput}>
+        <span
+          className="button is-info"
+          style={style.addInputBtn}
+          onClick={dataService.addInput}
+          disabled={isAddPButtonDisabled}
+        >
           <span style={style.btnPlus}>+</span> Add Participant
         </span>
+        <AmountPerPersonDisplay
+          amountDisplayValue={amountPerPerson}
+          numberOfParticipants={inputValues.length}
+          sizeRatio={sizeRatio}
+        />
       </fieldset>
     );
   }

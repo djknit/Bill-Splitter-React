@@ -1,4 +1,4 @@
-import { divider } from '../style';
+import { divider, repeatedRemovableFieldset } from '../style';
 
 export default function getStyle(sizeRatio) {
 
@@ -6,15 +6,6 @@ export default function getStyle(sizeRatio) {
     divider: {
       ...divider
     },
-    fieldset: {
-      position: 'relative'
-    },
-    removeBtn: {
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      padding: '0 5px',
-      fontSize: '.65rem'
-    }
+    ...repeatedRemovableFieldset
   };
 }

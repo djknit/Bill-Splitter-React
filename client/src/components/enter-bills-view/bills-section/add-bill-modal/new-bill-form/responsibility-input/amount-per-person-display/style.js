@@ -1,16 +1,20 @@
 import { selectionColor, optionColor, getFontSize } from '../../../../../../form-pieces/style';
 
 export default function getStyle(sizeRatio) {
-  const fontSize = getFontSize(sizeRatio);
+  const div = {
+    fontSize: getFontSize(sizeRatio),
+    display: 'inline-block',
+    verticalAlign: 'bottom'
+  }
 
   return {
     divNoValue: {
       color: optionColor,
-      fontSize
+      ...div
     },
     divWithValue: {
       color: selectionColor,
-      fontSize
+      ...div
     },
     value: {
       fontWeight: 500

@@ -1,7 +1,8 @@
 import {
   sectionSubdividerFirst,
   subsectionContainer,
-  divider
+  divider,
+  repeatedRemovableFieldset
 } from '../style';
 
 export default {
@@ -9,4 +10,4 @@ export default {
   subsectionContainer
 };
 
-export { divider };
+export { divider, repeatedRemovableFieldset };

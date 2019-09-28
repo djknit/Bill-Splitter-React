@@ -14,8 +14,7 @@ export default function getStyle(sizeRatio) {
     padding: '.375rem .75rem 0',
     fontSize: '2rem',
     fontWeight: 400,
-    lineHeight: 1.5,
-    fontSize
+    lineHeight: 1.5
   };
   
   return {

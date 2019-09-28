@@ -31,6 +31,7 @@ function SomeEvenlyInput({
           className="button is-danger is-small"
           style={style.removeBtn}
           onClick={removeInput}
+          style={style.removeBtn}
         >
           <span className="delete is-small"></span>
           &nbsp;Remove

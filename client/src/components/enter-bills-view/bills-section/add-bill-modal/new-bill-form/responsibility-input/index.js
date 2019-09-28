@@ -4,7 +4,6 @@ import style from './style';
 import { Legend, RadioInputs } from '../../../../../form-pieces';
 import AmountPerPersonDisplay from './amount-per-person-display';
 import SomeEvenlyInputs from './some-evenly-inputs';
-import Individually from './individually-inputs';
 import IndividuallyInputs from './individually-inputs';
 
 class ResponsibilityInput extends Component {
@@ -63,19 +62,19 @@ class ResponsibilityInput extends Component {
         <hr style={style.sectionSubdividerFirst} />
         <div style={style.subsectionContainer}>
           {
-            splittingMethod === 'allEvenly' && (
+            (splittingMethod === 'allEvenly' && (
               <AmountPerPersonDisplay
                 amountDisplayValue={allEvenlyAmountPerPerson.display}
                 numberOfParticipants={numberOfParticipants}
                 sizeRatio={subsectionSizeRatio}
               />
-            ) ||
-            splittingMethod === 'someEvenly' && (
+            )) ||
+            (splittingMethod === 'someEvenly' && (
               <SomeEvenlyInputs
                 formId={formId}
                 sizeRatio={subsectionSizeRatio}
               />
-            ) ||
+            )) ||
             (
               <IndividuallyInputs
                 formId={formId}

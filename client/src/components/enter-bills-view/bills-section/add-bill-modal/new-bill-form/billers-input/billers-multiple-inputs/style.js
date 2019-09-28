@@ -1,4 +1,4 @@
-import { divider } from '../style';
+import { divider, repeatedRemovableFieldset } from '../style';
 
 export default function getStyle(sizeRatio) {
   if (!sizeRatio) sizeRatio = 1;
@@ -17,4 +17,4 @@ export default function getStyle(sizeRatio) {
   };
 }
 
-export { divider };
+export { divider, repeatedRemovableFieldset };

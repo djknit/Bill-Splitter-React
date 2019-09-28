@@ -1,5 +1,4 @@
 import React from 'react';
-import { requireProps } from '../../../utilities';
 import getStyle from './style';
 
 function RadioInputs({

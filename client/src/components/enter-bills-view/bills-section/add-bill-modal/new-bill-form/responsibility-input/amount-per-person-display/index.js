@@ -10,7 +10,10 @@ function AllEvenlyDisplay({
   const style = getStyle(sizeRatio);
   console.log(sizeRatio)
 
-  if (amountDisplayValue === null) {
+  if (numberOfParticipants === 0) {
+    return <></>
+  }
+  else if (amountDisplayValue === null) {
     return (
       <div style={style.divNoValue}>
         Enter the Bill Total above to see the cost per person.
@@ -20,7 +23,7 @@ function AllEvenlyDisplay({
   else if (amountDisplayValue === 'negative') {
     return (
       <div style={style.divNoValue}>
-        Correct the Bill Total above to see the cost per person. Negative values are not allowed.
+        Correct the Bill Total above to see the cost per person.
       </div>
     );
   }

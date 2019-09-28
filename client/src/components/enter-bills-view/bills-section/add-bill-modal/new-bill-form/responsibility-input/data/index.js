@@ -1,4 +1,4 @@
-import { DataServiceFactory, AmountValueStoreFactory } from '../../../../../../../utilities';
+import { DataServiceFactory } from '../../../../../../../utilities';
 import splittingMethodAndAllEvenlyAmountService from './responsibility-component';
 import someEvenlyService from '../some-evenly-inputs/data';
 import individuallyService from '../individually-inputs/data';

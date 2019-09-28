@@ -7,7 +7,7 @@ export default function generateAmountValueStore() {
     set(value) {
       raw = value;
       const parsedValue = parseFloat(value);
-      if (value === '') {
+      if (!value && value !== 0) {
         rounded = null;
         display = null;
       }
