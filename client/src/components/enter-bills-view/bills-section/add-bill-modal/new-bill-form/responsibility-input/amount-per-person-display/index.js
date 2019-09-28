@@ -8,7 +8,6 @@ function AllEvenlyDisplay({
 }) {
 
   const style = getStyle(sizeRatio);
-  console.log(sizeRatio)
 
   if (numberOfParticipants === 0) {
     return <></>
