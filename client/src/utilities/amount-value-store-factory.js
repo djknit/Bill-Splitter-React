@@ -29,18 +29,18 @@ function AmountValueFactory(raw, options) {
       display: null
     };
   }
-  else if (!isPercent && parsedValue < 0) {
-    return {
-      raw,
-      rounded: null,
-      display: 'negative'
-    };
-  }
-  else if (parsedValue < 0 || parsedValue > 100) {
+  else if (isPercent && (parsedValue < 0 || parsedValue > 100)) {
     return {
       raw,
       rounded: null,
       display: 'invalid'
+    };
+  }
+  else if (parsedValue < 0) {
+    return {
+      raw,
+      rounded: null,
+      display: 'negative'
     };
   }
   else {

@@ -38,6 +38,36 @@ billAmountService.subscribe(getBillTotal);
 
 reset();
 
+function addInput() {
+  inputValues.push({
+    selectedParticipantId: null,
+    inputId: nextInputId++,
+    amount: {
+      method: 'dollarAmount',
+      dollarAmount: AmountValueStoreFactory(),
+      percent: AmountValueStoreFactory('percent'),
+      get percentDollarAmountValue() {
+        const roundedPercent = this.percent.get().rounded;
+        const roundedBillTotal = billTotal && billTotal.rounded() || null;
+        if (roundedBillTotal === null || roundedPercent === null) {
+          return AmountValueFactory(null);
+        }
+        else return AmountValueFactory(roundedBillTotal * roundedPercent / 100);
+      },
+      get determinedAmount() {
+        if (this.method === 'remainder') return 0;
+        else if (this.method === 'dollarAmount') {
+          return this.dollarAmount.get().rounded || 0;
+        }
+        else { // then method === 'percent'
+          return this.percentDollarAmountValue.rounded || 0;
+        }
+      }
+    }
+  });
+}
+
+
 function readInputValues() {
   if (!billTotal) billTotal = AmountValueFactory(null);
   let roundedBillTotal = billTotal.rounded;
@@ -46,6 +76,7 @@ function readInputValues() {
   }
   let totalAmountAssigned = 0;
   let indexesToAssignRemainder = [];
+
   let result = {
     inputValues: inputValues.map((
       {
@@ -83,6 +114,7 @@ function readInputValues() {
       ...billTotal
     }
   };
+
   if (indexesToAssignRemainder.length === 1) {
     const targetAmountValue = result.inputValues[indexesToAssignRemainder[0]].amount;
     if (roundedBillTotal === null) {
@@ -107,6 +139,7 @@ function readInputValues() {
   return result;
 };
 
+
 function getOptions(selectedParticipantId) {
   const allSelectedParticipantIds = inputValues.map(input => input.selectedParticipantId);
   return participants.map(
@@ -116,35 +149,6 @@ function getOptions(selectedParticipantId) {
       disabled: selectedParticipantId !== id && allSelectedParticipantIds.indexOf(id) !== -1
     })
   );
-}
-
-function addInput() {
-  inputValues.push({
-    selectedParticipantId: null,
-    inputId: nextInputId++,
-    amount: {
-      method: 'dollarAmount',
-      dollarAmount: AmountValueStoreFactory(),
-      percent: AmountValueStoreFactory('percent'),
-      get percentDollarAmountValue() {
-        const roundedPercent = this.percent.get().rounded;
-        const roundedBillTotal = billTotal && billTotal.rounded() || null;
-        if (roundedBillTotal === null || roundedPercent === null) {
-          return AmountValueFactory(null);
-        }
-        else return AmountValueFactory(roundedBillTotal * roundedPercent / 100);
-      },
-      get determinedAmount() {
-        if (this.method === 'remainder') return 0;
-        else if (this.method === 'dollarAmount') {
-          return this.dollarAmount.get().rounded || 0;
-        }
-        else { // then method === 'percent'
-          return this.percentDollarAmountValue.rounded || 0;
-        }
-      }
-    }
-  });
 }
 
 function getParticipants() {
