@@ -8,6 +8,8 @@ function Section({
   openModal
 }) {
 
+  isButtonDisabled = isButtonDisabled === true;
+
   return (
     <div className="card" style={style.card}>
       <header className="card-header">
@@ -21,9 +23,9 @@ function Section({
       <footer className="card-footer" style={style.cardFooter}>
         <div
           className="button is-info"
-          style={style.addParticipant}
-          disabled={isButtonDisabled === true}
-          onClick={openModal}
+          style={style.addButton}
+          disabled={isButtonDisabled}
+          onClick={isButtonDisabled ? undefined : openModal}
         >
           Add {type}
         </div>

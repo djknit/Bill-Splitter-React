@@ -56,7 +56,7 @@ class SomeEvenlyInputs extends Component {
         <span
           className="button is-info"
           style={style.addInputBtn}
-          onClick={dataService.addInput}
+          onClick={isAddPButtonDisabled ? undefined : dataService.addInput}
           disabled={isAddPButtonDisabled}
         >
           <span style={style.btnPlus}>+</span> Add Participant

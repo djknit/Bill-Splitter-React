@@ -17,7 +17,7 @@ export default {
     display: 'block',
     padding: 10
   },
-  addParticipant: {
+  addButton: {
     display: 'inline-block',
     height: 'auto'
   }
