@@ -20,7 +20,7 @@ let dataService = DataServiceFactory({
         })
       ),
       isAddPButtonDisabled: participants.length <= inputValues.length,
-      amountPerPerson: amountPerPerson.get().display
+      amountPerPerson: amountPerPerson.get()
     }
   },
   methods: {
@@ -31,6 +31,7 @@ let dataService = DataServiceFactory({
     addInput,
     removeInput(index) {
       inputValues.splice(index, 1);
+      setAmountPerPerson();
     }
   },
   isAsync: false

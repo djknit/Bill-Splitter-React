@@ -62,7 +62,7 @@ class SomeEvenlyInputs extends Component {
           <span style={style.btnPlus}>+</span> Add Participant
         </span>
         <AmountPerPersonDisplay
-          amountDisplayValue={amountPerPerson}
+          amountDisplayValue={amountPerPerson.display}
           numberOfParticipants={inputValues.length}
           sizeRatio={sizeRatio}
         />

@@ -15,7 +15,7 @@ function AmountInput({
   isLastChild
 }) {
 
-  const inputId = `${formId}-${name}-in`;
+  const inputId = (formId && name) ? `${formId}-${name}-in` : undefined;
 
   const style = getStyle(sizeRatio);
 

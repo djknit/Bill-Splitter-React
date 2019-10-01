@@ -27,7 +27,8 @@ class IndividuallyInputs extends Component {
       inputValues,
       unassignedAmount,
       hasMultipleRemainderSelections,
-      indexesOfInputsHavingSelectedRemainderMethod
+      indexesOfInputsHavingSelectedRemainderMethod,
+      isAddPButtonDisabled
     } = this.state;
     const {
       formId,
@@ -57,6 +58,15 @@ class IndividuallyInputs extends Component {
             )
           )
         }
+        <hr style={style.divider} />
+        <span
+          className="button is-info"
+          style={style.addInputBtn}
+          onClick={isAddPButtonDisabled ? undefined : dataService.addInput}
+          disabled={isAddPButtonDisabled}
+        >
+          <span style={style.btnPlus}>+</span> Add Participant
+        </span>
       </fieldset>
     );
   }

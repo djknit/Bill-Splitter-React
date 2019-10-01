@@ -1,5 +1,3 @@
-import { parse } from "querystring";
-
 export default function AmountValueStoreFactory(type) {
   const isPercent = type === 'percent';
   let value = AmountValueFactory('');
@@ -20,7 +18,7 @@ export default function AmountValueStoreFactory(type) {
 }
 
 function AmountValueFactory(raw, options) {
-  const isPercent = options && options.isPercent || false;
+  const isPercent = (options && options.isPercent) || false;
   const parsedValue = parseFloat(raw);
   if (!parsedValue && parsedValue !== 0) {
     return {

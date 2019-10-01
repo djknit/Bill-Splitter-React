@@ -32,7 +32,6 @@ class ParticipantsSection extends Component {
   }
 
   toggleModal(addOrRemove, isActive, participant) {
-    console.log(participant)
     const isAdd = addOrRemove === 'add';
     const propertyToSet = isAdd ? 'isAddPModalActive' : 'isRemovePModalActive';
     if (isActive && isAdd) this.focusModalInput();
