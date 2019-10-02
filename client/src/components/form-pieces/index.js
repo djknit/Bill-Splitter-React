@@ -2,6 +2,7 @@ import TextInput from './text-input';
 import RadioInputs from './radio-inputs';
 import SelectInput from './select-input';
 import AmountInput from './amount-input';
+import PercentAmountInput from './percent-amount-input'
 import Legend from './legend';
 
 export default {
@@ -9,7 +10,8 @@ export default {
   RadioInputs,
   SelectInput,
   AmountInput,
-  Legend
+  Legend,
+  PercentAmountInput
 };
 
 export {
@@ -17,5 +19,6 @@ export {
   RadioInputs,
   SelectInput,
   AmountInput,
-  Legend
+  Legend,
+  PercentAmountInput
 };

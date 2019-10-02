@@ -25,10 +25,9 @@ class IndividuallyInputs extends Component {
   render() {
     const {
       inputValues,
-      unassignedAmount,
-      hasMultipleRemainderSelections,
-      indexesOfInputsHavingSelectedRemainderMethod,
-      isAddPButtonDisabled
+      isAddPButtonDisabled,
+      remainderMethodSelectionIndexes,
+      billTotal
     } = this.state;
     const {
       formId,
@@ -54,6 +53,8 @@ class IndividuallyInputs extends Component {
                 }
                 key={inputValue.inputId}
                 removeInput={() => dataService.removeInput(index)}
+                billTotal={billTotal}
+                remainderMethodSelectionIndexes={remainderMethodSelectionIndexes}
               />
             )
           )

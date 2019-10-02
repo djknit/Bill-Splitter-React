@@ -47,6 +47,7 @@ function SomeEvenlyInput({
           isInline
           options={options}
           hasSmallMargins
+          isLastChild
         />
       </fieldset>
     </>

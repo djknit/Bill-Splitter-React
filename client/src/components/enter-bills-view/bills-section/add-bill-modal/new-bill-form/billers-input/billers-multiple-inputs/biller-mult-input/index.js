@@ -93,6 +93,8 @@ function BillerMultInput({
           label="Amount"
           sizeRatio={sizeRatio}
           isInline
+          hasSmallMargins
+          isLastChild
         />
       </fieldset>
     </>

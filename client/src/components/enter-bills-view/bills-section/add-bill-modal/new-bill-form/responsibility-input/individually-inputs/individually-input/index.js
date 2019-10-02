@@ -1,6 +1,7 @@
 import React from 'react';
 import getStyle from './style'
-import { Legend, SelectInput, RadioInputs, AmountInput } from '../../../../../../../form-pieces';
+import { Legend, SelectInput, RadioInputs, AmountInput, PercentAmountInput }
+  from '../../../../../../../form-pieces';
 
 function IndividuallyInput({
   index,
@@ -9,12 +10,14 @@ function IndividuallyInput({
   sizeRatio,
   updateSelectedParticipantId,
   updateAmount,
-  removeInput
+  removeInput,
+  billTotal,
+  remainderMethodSelectionIndexes
 }) {
 
   const style = getStyle(sizeRatio);
   const { selectedParticipantId, options, amount } = inputValue;
-  const { method, dollarAmount } = amount;
+  const { method, dollarAmount, percent } = amount;
 
   return (
     <>
@@ -78,11 +81,25 @@ function IndividuallyInput({
           (method === 'dollarAmount' && (
             <AmountInput
               value={dollarAmount}
-              handleChange={value => updateAmount('dollarAmount', value)}
+              handleChange={rawValue => updateAmount('dollarAmount', rawValue)}
               sizeRatio={sizeRatio}
               hasSmallMargins
+              isLastChild
             />
-          ))
+          )) || (
+          method === 'percent' && (
+            <PercentAmountInput
+              value={amount}
+              handleChange={rawValue => updateAmount('percent', rawValue)}
+              sizeRatio={sizeRatio}
+              hasSmallMargins
+              isLastChild
+              billTotal={billTotal}
+              remainderMethodSelectionIndexes={remainderMethodSelectionIndexes}
+            />
+          )) || (
+            <></>
+          )
         }
       </fieldset>
     </>

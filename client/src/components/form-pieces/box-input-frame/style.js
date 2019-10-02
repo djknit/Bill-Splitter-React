@@ -17,7 +17,8 @@ export default function(sizeRatio, hasSmallMargins, isLastChild) {
     },
     fieldLabel: {
       flexGrow: 0,
-      marginRight: 10
+      marginRight: 10,
+      ...label
     }
   };
 }

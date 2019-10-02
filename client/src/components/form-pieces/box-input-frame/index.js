@@ -35,8 +35,8 @@ function BoxInputFrame({
       </label>
     ) : (
       <></>
-    )
-  };
+    );
+  }
 
   return isInline ?
     (
@@ -68,7 +68,11 @@ export default BoxInputFrame;
 function Control({ isInline, hasIcon, children, style }) {
   let className = 'control';
   if (isInline) className += ' is-expanded';
-  if (hasIcon) className += ' has-icons-left'
+  if (hasIcon) {
+    className += hasIcon === 'right' ?
+      ' has-icons-right' :
+      ' has-icons-left';
+  }
 
   return (
     <div
