@@ -42,7 +42,8 @@ function AmountValueFactory(raw, options) {
     };
   }
   else {
-    const display = parsedValue.toFixed(isPercent ? 1 : 2);
+    const percentPrecision = 2;
+    const display = parsedValue.toFixed(isPercent ? percentPrecision : 2);
     return {
       raw,
       display,

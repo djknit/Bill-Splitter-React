@@ -54,9 +54,14 @@ function PercentAmountInput({
             <>{percent.display} %</>
             {
               ((dollarAmount.display || dollarAmount.display === 0) && (
-                <span style={style.dollarAmountDisplay}>
-                  $ {dollarAmount.display}
-                </span>
+                <>
+                  <span style={style.percentDollarDivider}>
+                    =
+                  </span>
+                  <span style={style.dollarAmountDisplay}>
+                    $ {dollarAmount.display}
+                  </span>
+                </>
               ))
             }
           </div>

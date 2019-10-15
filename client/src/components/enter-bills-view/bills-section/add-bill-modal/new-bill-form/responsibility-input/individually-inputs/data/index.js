@@ -94,20 +94,23 @@ function readInputValues() {
     );
   }
   else if (indexesToAssignRemainder.length === 1) {
-    const targetAmountValue = result.inputValues[indexesToAssignRemainder[0]].amount;
-    if (roundedBillTotal === null) {
-      targetAmountValue.dollarAmount = { ...billTotal };
+    const targetAmountInput = result.inputValues[indexesToAssignRemainder[0]].amount;
+    if (roundedBillTotal === null || roundedBillTotal < 0) {
+      targetAmountInput.dollarAmount = AmountValueFactory(null);
+      targetAmountInput.problem = roundedBillTotal === null ? 'no total' : 'bad total';
       result.unassignedAmount = AmountValueFactory(null);
     }
     else {
       const remainder = AmountValueFactory(roundedBillTotal - totalAmountAssigned);
-      targetAmountValue.dollarAmount = { ...remainder };
+      targetAmountInput.dollarAmount = { ...remainder };
       result.unassignedAmount = AmountValueFactory(0);
     }
   }
   else { // indexesToAssignRemainder.length > 1
     indexesToAssignRemainder.forEach(inputIndex => {
-      result.inputValues[inputIndex].amount.dollarAmount = AmountValueFactory(null);
+      const targetAmountInput = result.inputValues[inputIndex].amount;
+      targetAmountInput.dollarAmount = AmountValueFactory(null);
+      targetAmountInput.problem = 'multiple remainders';
       result.unassignedAmount = AmountValueFactory(null);
     });
   }

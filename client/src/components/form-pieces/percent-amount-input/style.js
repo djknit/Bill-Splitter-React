@@ -43,9 +43,13 @@ export default function getStyle(sizeRatio) {
       fontSize,
       right: `calc(100% - ${inputWidth}px)`
     },
+    percentDollarDivider: {
+      display: 'inline-block',
+      marginLeft: 15
+    },
     dollarAmountDisplay: {
       display: 'inline-block',
-      marginLeft: 30
+      marginLeft: 15
     }
   }
 }

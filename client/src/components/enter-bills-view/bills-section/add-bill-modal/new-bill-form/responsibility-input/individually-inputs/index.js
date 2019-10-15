@@ -27,7 +27,8 @@ class IndividuallyInputs extends Component {
       inputValues,
       isAddPButtonDisabled,
       remainderMethodSelectionIndexes,
-      billTotal
+      billTotal,
+      unassignedAmount
     } = this.state;
     const {
       formId,
@@ -68,6 +69,21 @@ class IndividuallyInputs extends Component {
         >
           <span style={style.btnPlus}>+</span> Add Participant
         </span>
+        {
+          (
+            unassignedAmount.rounded === 0 && (
+              <span style={style.errorZero}>
+                The total amount assigned matches the Bill Total.
+              </span>
+            )
+          ) || (
+            unassignedAmount.rounded !== null && (
+              <span style={style.error}>
+                The total amount assigned does <strong style={style.errorStrong}>not</strong> match the Bill Total.
+              </span>
+            )
+          )
+        }
       </fieldset>
     );
   }

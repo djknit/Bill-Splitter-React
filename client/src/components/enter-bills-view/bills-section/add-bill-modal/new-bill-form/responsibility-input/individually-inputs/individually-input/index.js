@@ -17,7 +17,7 @@ function IndividuallyInput({
 
   const style = getStyle(sizeRatio);
   const { selectedParticipantId, options, amount } = inputValue;
-  const { method, dollarAmount, percent } = amount;
+  const { method, dollarAmount, problem } = amount;
 
   return (
     <>
@@ -27,11 +27,13 @@ function IndividuallyInput({
         )
       }
       <fieldset style={style.fieldset}>
+    
         <Legend
           label={`Responsible Participant ${index + 1}`}
           hasSmallMargins
           sizeRatio={sizeRatio}
         />
+    
         <span
           className="button is-danger is-small"
           style={style.removeBtn}
@@ -41,6 +43,7 @@ function IndividuallyInput({
           <span className="delete is-small"></span>
           &nbsp;Remove
         </span>
+    
         <SelectInput
           placeholder="Select participant name"
           label="Name"
@@ -53,6 +56,7 @@ function IndividuallyInput({
           options={options}
           hasSmallMargins
         />
+    
         <Legend
           label="Amount"
           sublabel="How much is this participant responsible for paying?"
@@ -77,8 +81,9 @@ function IndividuallyInput({
           hasSmallMargins
           sizeRatio={sizeRatio}
         />
+
         {
-          (method === 'dollarAmount' && (
+          method === 'dollarAmount' && (
             <AmountInput
               value={dollarAmount}
               handleChange={rawValue => updateAmount('dollarAmount', rawValue)}
@@ -86,7 +91,7 @@ function IndividuallyInput({
               hasSmallMargins
               isLastChild
             />
-          )) || (
+          ) || (
           method === 'percent' && (
             <PercentAmountInput
               value={amount}
@@ -95,12 +100,24 @@ function IndividuallyInput({
               hasSmallMargins
               isLastChild
               billTotal={billTotal}
-              remainderMethodSelectionIndexes={remainderMethodSelectionIndexes}
             />
           )) || (
-            <></>
+          method === 'remainder' && (
+              <div style={problem ? style.remainderDisplayProblem : style.remainderDisplay}>
+                {
+                  !problem && (
+                    <>
+                      ${dollarAmount.display}
+                    </>
+                  ) || (
+                  problem === 'no total'
+                  )
+                }
+              </div>
+            )
           )
         }
+
       </fieldset>
     </>
   );

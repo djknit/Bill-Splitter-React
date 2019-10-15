@@ -10,8 +10,8 @@ function Message({
 
   let className = 'message';
   if (theme) className += ` is-${theme}`;
-  if (size) className += ` is-${size}`
-  if (align) className += ` has-text-${align}`
+  if (size) className += ` is-${size}`;
+  if (align) className += ` has-text-${align}`;
 
   return (
     <article className={className} style={style}>
