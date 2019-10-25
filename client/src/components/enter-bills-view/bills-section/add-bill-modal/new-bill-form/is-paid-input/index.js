@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import dataService from './data';
-import { Legend, RadioInputs } from '../../../../../form-pieces'
+import { participantsService } from '../../../../../enter-bills-view/data/entities/index';
+import { Legend, RadioInputs } from '../../../../../form-pieces';
+import style from './style';
+import PayerSingleInput from './payer-single-input';
+import PayersMultipleInputs from './payers-multiple-inputs';
 
 class IsPaidInput extends Component {
   constructor() {
@@ -27,8 +31,8 @@ class IsPaidInput extends Component {
   }
 
   render() {
-    const { formId } = this.props;
-    const { inputValue } = this.state;
+    const { formId, subsectionSizeRatio } = this.props;
+    const { isPaid, oneOrMore, numberOfParticipants } = this.state.inputValue;
 
     return (
       <fieldset>
@@ -37,7 +41,7 @@ class IsPaidInput extends Component {
           hasSmallMargins
         />
         <RadioInputs
-          selectedValue={inputValue}
+          selectedValue={isPaid}
           options={[
             {
               value: true,
@@ -47,9 +51,53 @@ class IsPaidInput extends Component {
               label: 'No'
             }
           ]}
-          handleChange={value => dataService.update(value)}
+          handleChange={value => dataService.update('isPaid', value)}
           hasSmallMargins
         />
+        {
+          isPaid && numberOfParticipants > 1 && (
+            <>
+              <hr style={style.sectionSubdividerFirst} />
+              <fieldset style={style.subsectionContainer}>
+                <Legend
+                  label="Payer"
+                  sublabel="Who paid this bill?"
+                  hasSmallMargins
+                  sizeRatio={subsectionSizeRatio}
+                />
+                <RadioInputs
+                  selectedValue={oneOrMore}
+                  options={[
+                    {
+                      value: 'one',
+                      label: 'One Payer (default)'
+                    }, {
+                      value: 'more',
+                      label: 'Multiple Payers'
+                    }
+                  ]}
+                  handleChange={val => dataService.update('oneOrMore', val)}
+                  hasSmallMargins
+                  sizeRatio={subsectionSizeRatio}
+                />
+                <hr style={style.sectionSubdividerFirst} />
+                <div style={style.subsectionContainer}>
+                  {
+                    oneOrMore && (
+                      oneOrMore === 'one' ?
+                        <PayerSingleInput sizeRatio={subsectionSizeRatio} /> :
+                        <PayersMultipleInputs
+                          sizeRatio={subsectionSizeRatio}
+                          numberOfParticipants={numberOfParticipants}
+                        />
+                      
+                    )
+                  }
+                </div>
+              </fieldset>
+            </>
+          )
+        }
       </fieldset>
     );
   }

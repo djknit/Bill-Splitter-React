@@ -1,6 +1,6 @@
 import DataServiceFactory from '../../../../../../utilities/data-service-factory';
 import nameDataService from '../name-input/data';
-import amountService from '../amount-input/data';
+import amountService from '../bill-amount-input/data';
 import billersService from '../billers-input/data';
 import responsibilityService from '../responsibility-input/data';
 import isPaidService from '../is-paid-input/data';
@@ -15,6 +15,7 @@ let formData = {
 
 const dataService = DataServiceFactory({
   readFunction() {
+    console.log({...formData});
     return { ...formData };
   },
   methods: {
@@ -23,7 +24,7 @@ const dataService = DataServiceFactory({
       amountService.reset();
       billersService.reset();
       responsibilityService.reset();
-      isPaid.reset();
+      isPaidService.reset();
     },
     submit() {
       
@@ -33,22 +34,29 @@ const dataService = DataServiceFactory({
 });
 
 nameDataService.subscribe(() => {
-  inputData.name = nameDataService.getValue();
+  formData.name = nameDataService.getValue();
+  // console.log({...formData})
   dataService._emit();
 });
 amountService.subscribe(() => {
-  inputData.amount = amountService.getValue();
+  formData.amount = amountService.getValue();
+  // console.log({...formData})
   dataService._emit();
 });
 billersService.subscribe(() => {
-  inputData.billers = billersService.getValue();
+  formData.billers = billersService.getValue();
+  // console.log({...formData})
   dataService._emit();
 });
 responsibilityService.subscribe(() => {
-  inputData.responsibility = responsibilityService.getValue();
+  formData.responsibility = responsibilityService.getValue();
+  // console.log({...formData})
   dataService._emit();
 });
 isPaidService.subscribe(() => {
-  inputData.isPaid = isPaidService.getValue();
+  formData.isPaid = isPaidService.getValue();
+  // console.log({...formData})
   dataService._emit();
 });
+
+export default dataService;

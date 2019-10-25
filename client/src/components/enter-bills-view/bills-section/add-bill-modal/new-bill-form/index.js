@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import formDataService from './data';
 import style from './style';
 import NameInput from './name-input';
 import AmountInput from './bill-amount-input';
@@ -15,6 +16,10 @@ class NewBillForm extends Component {
   submit(event) {
     event.preventDefault();
     console.log('submit new-bill-form')
+  }
+
+  componentDidMount() {
+    formDataService.subscribe(() => null)
   }
 
   render() {
@@ -59,7 +64,7 @@ class NewBillForm extends Component {
           <Divider />
           <ResponsibilityInput formId={formId} subsectionSizeRatio={subsectionSizeRatio} />
           <Divider />
-          <IsPaidInput formId={formId} />
+          <IsPaidInput formId={formId} subsectionSizeRatio={subsectionSizeRatio} />
         </form>
       </>
     );

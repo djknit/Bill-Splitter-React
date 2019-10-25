@@ -9,7 +9,10 @@ let participants = [];
 let dataService = DataServiceFactory({
   readFunction: readInputValues,
   methods: {
-    addInput,
+    addInput: () => {
+      if (inputValues.length >= participants.length) return null;
+      addInput();
+    },
     reset,
     updateSelectedParticipantId(index, selectedParticipantId) {
       inputValues[index].selectedParticipantId = parseInt(selectedParticipantId);
