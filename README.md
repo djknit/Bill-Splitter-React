@@ -65,8 +65,9 @@ I am working on the "Enter Bills" page which is where the most important logic n
   * [x] Bill Name section (design and implement with logic including updating state)
   * [x] Bill Total section
   * [x] Billers section
-  * [ ] Responsible participants section
-  * [ ] isPaid/paidBy section
+  * [x] Responsible participants section
+  * [x] isPaid/paidBy section
+  * [ ] Create submit function for new-bill-form to validate form and add bill to list or highlight input problems.
 * [ ] Create remove bill functionality
 * [ ] Add logic to calculate bills
 * [ ] Design results display
