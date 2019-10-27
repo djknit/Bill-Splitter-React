@@ -28,7 +28,16 @@ let dataService = DataServiceFactory({
     },
     reset
   },
-  isAsync: false
+  isAsync: false,
+  validateFunction() {
+    const { typeOrSelect, selectedAgentId, typed } = inputValue;
+    if (typeOrSelect === 'type') {
+      return typed === '' ? 'no-name' : null;
+    }
+    else { // select
+      return selectedAgentId === null ? 'no-name' : null;
+    }
+  }
 });
 
 export default dataService;

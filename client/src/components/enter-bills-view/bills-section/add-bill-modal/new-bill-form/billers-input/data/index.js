@@ -37,7 +37,12 @@ let billersDataService = DataServiceFactory({
   methods: {
     reset
   },
-  isAsync: false
+  isAsync: false,
+  validateFunction() {
+    console.log('VALIDATE BILLERS')
+    return inputValue.oneOrMoreBillers === 'one' ?
+      billerSingleService.getProblems() : billersMultipleService.getProblems();
+  }
 });
 
 oneOrMoreBillersService.subscribe(() => billersDataService._emit());

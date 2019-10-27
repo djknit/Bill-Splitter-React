@@ -12,7 +12,7 @@ export default function AmountValueStoreFactory(type) {
       };
     },
     reset() {
-      this.set(null);
+      this.set('');
     }
   };
 }
@@ -24,21 +24,24 @@ function AmountValueFactory(raw, options) {
     return {
       raw,
       rounded: null,
-      display: null
+      display: null,
+      problem: 'no-value'
     };
   }
   else if (isPercent && (parsedValue < 0 || parsedValue > 100)) {
     return {
       raw,
       rounded: null,
-      display: 'invalid'
+      display: 'invalid',
+      problem: 'bad-value'
     };
   }
   else if (parsedValue < 0) {
     return {
       raw,
       rounded: null,
-      display: 'negative'
+      display: 'negative',
+      problem: 'bad-value'
     };
   }
   else {
@@ -47,7 +50,8 @@ function AmountValueFactory(raw, options) {
     return {
       raw,
       display,
-      rounded: parseFloat(display)
+      rounded: parseFloat(display),
+      problem: null
     };
   }
 }

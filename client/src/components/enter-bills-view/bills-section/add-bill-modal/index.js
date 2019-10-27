@@ -2,23 +2,37 @@ import React, { Component } from 'react';
 // import { participantsService } from '../../data/entities';
 import ModalSkeleton from '../../modal-skeleton';
 import NewBillForm from './new-bill-form';
-
-const defaultState = {
-  hasSuccess: false,
-  hasProblem: false,
-  errorMessage: null
-};
+import formDataService from './new-bill-form/data';
 
 class AddBillModal extends Component {
   constructor(props) {
     super(props);
     this.reset = this.reset.bind(this);
+    this.cancel = this.cancel.bind(this);
+    this.getData = this.getData.bind(this);
     this.cancelButtonRef = React.createRef();
-    this.state = defaultState;
+    this.state = formDataService.getValue();
   }
 
   reset() {
-    this.setState(defaultState);
+    formDataService.reset();
+  }
+
+  cancel() {
+    this.props.closeModal();
+    this.reset();
+  }
+
+  getData() {
+    this.setState(formDataService.getValue());
+  }
+
+  componentDidMount() {
+    formDataService.subscribe(this.getData);
+  }
+
+  componentWillUnmount() {
+    formDataService.unsub(this.getData)
   }
 
   render() {

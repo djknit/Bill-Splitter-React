@@ -7,7 +7,8 @@ const EventEmitter = require('events');
 export default function DataServiceFactory({
   readFunction,
   methods,
-  isAsync
+  isAsync,
+  validateFunction
 }) {
 
   const emitter = new EventEmitter();
@@ -23,7 +24,8 @@ export default function DataServiceFactory({
     },
     _emit() {
       emitter.emit('change');
-    }
+    },
+    getProblems: validateFunction || missingValidateFunction
   };
 
   const methodKeys = Object.keys(methods);
@@ -53,3 +55,7 @@ export default function DataServiceFactory({
   return dataService;
 
 };
+
+function missingValidateFunction() {
+  return console.log('missing validation function');
+}

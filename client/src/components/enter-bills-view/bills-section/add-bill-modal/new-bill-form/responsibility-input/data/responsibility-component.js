@@ -37,7 +37,8 @@ let splittingMethodAndAllEvenlyAmountService = DataServiceFactory({
       else {
         inputValue.allEvenlyAmountPerPerson.set(billAmountValue.raw);
       }
-    }
+    },
+    reset
   },
   isAsync: false
 });

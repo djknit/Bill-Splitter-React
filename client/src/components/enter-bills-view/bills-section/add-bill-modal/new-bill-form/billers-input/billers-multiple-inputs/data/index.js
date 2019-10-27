@@ -21,7 +21,15 @@ function addInput(n) {
       typed: '',
       selectedAgentId: null,
       amount: AmountValueStoreFactory(),
-      inputId: nextInputId++ // used for repeated element unique key
+      inputId: nextInputId++, // used for repeated element unique key
+      get problems() {
+        console.log('....checking amount problemos')
+        console.log(this.amount.problems);
+        console.log(this.amount)
+        let problems = {
+          name: this.typeOrSelect === 'type'
+        }
+      }
     });
   }
 }
@@ -73,7 +81,19 @@ let dataService = DataServiceFactory({
     },
     reset
   },
-  isAsync: false
+  isAsync: false,
+  validateFunction() {
+    let fail = false;
+    const inputProblems = inputValues.map(input => {
+      if (input.problems === null) return null;
+      else {
+        fail = true;
+        return input.problems;
+      }
+    });
+    if (!fail) return null;
+    return inputProblems;
+  }
 });
 
 export default dataService;

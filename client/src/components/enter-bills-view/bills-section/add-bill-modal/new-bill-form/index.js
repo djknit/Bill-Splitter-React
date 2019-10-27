@@ -6,20 +6,32 @@ import AmountInput from './bill-amount-input';
 import BillersInput from './billers-input';
 import ResponsibilityInput from './responsibility-input';
 import IsPaidInput from './is-paid-input';
+import dataService from './billers-input/biller-single-input/data';
 
 class NewBillForm extends Component {
   constructor(props) {
     super(props);
     this.submit = this.submit.bind(this);
+    this.getData = this.getData.bind(this);
+    this.state = dataService.getValue();
   }
 
   submit(event) {
     event.preventDefault();
-    console.log('submit new-bill-form')
+    formDataService.submit();
+  }
+
+  getData() {
+    this.setState(dataService.getValue);
   }
 
   componentDidMount() {
-    formDataService.subscribe(() => null)
+    this.getData();
+    formDataService.subscribe(this.getData);
+  }
+
+  componentWillUnmount() {
+    formDataService.unsub(this.getData);
   }
 
   render() {

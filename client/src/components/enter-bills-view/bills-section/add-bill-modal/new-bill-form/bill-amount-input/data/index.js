@@ -6,6 +6,9 @@ let dataService = DataServiceFactory({
   readFunction() {
     return inputValue.get();
   },
+  validateFunction() {
+    return inputValue.get().problem;
+  },
   methods: {
     update(newRawValue) {
       inputValue.set(newRawValue);
