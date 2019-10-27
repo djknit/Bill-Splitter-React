@@ -11,14 +11,14 @@ class Navlink extends Component {
     this.reportPathChange = this.reportPathChange.bind(this);
     this.linkText = React.createRef();
     this.state = {
-      currentPath: currentPath.value,
+      currentPath: currentPath.getValue(),
       style: getStyle()
     };
   }
 
   getCurrentPath() {
     this.setState({
-      currentPath: currentPath.value
+      currentPath: currentPath.getValue()
     });
   }
 

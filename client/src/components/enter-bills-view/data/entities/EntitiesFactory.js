@@ -1,5 +1,8 @@
 // Creates data stores for both types of entities, 'entities' and 'agents' (billers)
 export default function EntitiesFactory(entityType) {
+  const EventEmitter = require('events');
+  const emitter = new EventEmitter();
+
   let entities = [];
   let nextEntityId = 1;
 
@@ -12,8 +15,9 @@ export default function EntitiesFactory(entityType) {
           return reject({
             message: 'There is already ' + (isParticipant ? 'a ' : 'an ') + entityType +
               ' in this list with the name "' + trimmedName + '." If you have two ' +
-              entityType + 's with the same name, you must add a number' + ' or other ' +
-              'marker so that they can be identified.'
+              entityType + 's with the same name, you must add a number or other ' +
+              'marker so that they can be identified.',
+            inputProblem: true
           });
         }
         const newEntity = {
@@ -22,6 +26,7 @@ export default function EntitiesFactory(entityType) {
         };
         entities.push(newEntity);
         resolve(newEntity);
+        emitter.emit('change');
       }
     );
   }
@@ -42,8 +47,8 @@ export default function EntitiesFactory(entityType) {
           if (entities[i].id === id) {
             const removedParticipantName = entities[i].name;
             entities.splice(i, 1);
-            // console.log(entities);
-            return resolve(removedParticipantName);
+            resolve(removedParticipantName);
+            emitter.emit('change');
           }
         }
         reject({ message: 'Sorry, that participant could not be found. Please try again.' });
@@ -51,12 +56,11 @@ export default function EntitiesFactory(entityType) {
     );
   }
 
-  const EventEmitter = require('events');
-  const emitter = new EventEmitter();
-
   return {
-    get value() {
-      return entities.map(entity => Object.assign({}, entity));
+    getValue() {
+      return new Promise((resolve, reject) => {
+        resolve(entities.map(entity => Object.assign({}, entity)));
+      });
     },
     subscribe(callback) {
       emitter.on(
@@ -71,6 +75,6 @@ export default function EntitiesFactory(entityType) {
       );
     },
     add: addEntity,
-    remove: removeEntity
+    remove: (entityType === 'participant') ? removeEntity : undefined
   };
 }

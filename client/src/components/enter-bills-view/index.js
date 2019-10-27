@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import windowWidth from '../../data/windowWidth';
 import getStyle from './style';
+import billsListService from './data/billsList';
 import ParticipantsSection from './participants-section';
 import BillsSection from './bills-section';
 import Message from '../message';
@@ -10,14 +11,21 @@ class EnterBillsView extends Component {
     super();
     this.updateStyle = this.updateStyle.bind(this);
     this.state = {
-      style: getStyle(windowWidth.value)
+      style: getStyle(windowWidth.getValue()),
+      bills: []
     };
   }
 
   updateStyle() {
     this.setState({
-      style: getStyle(windowWidth.value)
+      style: getStyle(windowWidth.getValue())
     });
+  }
+
+  updateBills() {
+    billsListService
+      .getValue()
+      .then(bills => this.setState({ bills }));
   }
 
   componentDidMount() {
@@ -32,7 +40,8 @@ class EnterBillsView extends Component {
   }
 
   render() {
-    const { style } = this.state;
+    const { style, bills } = this.state;
+
     return (
       <div style={style.view}>
         <h1 style={style.mainHeading}>
@@ -61,7 +70,11 @@ class EnterBillsView extends Component {
         <BillsSection />
 
         <hr style={style.lastHr} />
-        <button className="button is-primary" style={style.calcBillsButton}>
+        <button
+          className="button is-primary"
+          style={style.calcBillsButton}
+          disabled={bills.length === 0}
+        >
           Calculate Bills
         </button>
       </div>

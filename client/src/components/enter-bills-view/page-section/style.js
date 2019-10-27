@@ -17,8 +17,17 @@ export default {
     display: 'block',
     padding: 10
   },
-  addParticipant: {
+  addButton: {
     display: 'inline-block',
     height: 'auto'
   }
 };
+
+const emptySectionText = {
+  textAlign: 'center',
+  paddingTop: 14,
+  paddingBottom: 14,
+  color: '#777777'
+};
+
+export { emptySectionText };

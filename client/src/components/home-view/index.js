@@ -11,13 +11,13 @@ class HomeView extends Component {
     this.updateStyle = this.updateStyle.bind(this);
     this.reportPathChange = this.reportPathChange.bind(this);
     this.state = {
-      style: getStyle(windowWidth.value)
+      style: getStyle(windowWidth.getValue())
     };
   }
 
   updateStyle() {
     this.setState({
-      style: getStyle(windowWidth.value)
+      style: getStyle(windowWidth.getValue())
     });
   }
 
@@ -37,8 +37,10 @@ class HomeView extends Component {
   }
 
   render () {
+    const { style } = this.state;
+
     return (
-      <div style={this.state.style.view}>
+      <div style={style.view}>
         <Message theme="success" align="centered">
           <h2 className="title">Welcome to Dave's Delux Bill Splitting App!</h2>
         </Message>
@@ -66,7 +68,7 @@ class HomeView extends Component {
               className="button is-info is-medium"
               to="/enter-bills"
               onClick={this.reportPathChange}
-              style={this.state.style.enterBillsButton}
+              style={style.enterBillsButton}
             >
               Enter Bills
             </Link>

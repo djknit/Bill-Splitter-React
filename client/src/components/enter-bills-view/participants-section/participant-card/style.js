@@ -1,8 +1,14 @@
+const card = {
+  display: 'inline-block',
+  position: 'relative'
+};
+
 export default {
-  card: {
-    display: 'inline-block',
-    position: 'relative'
-  },
+  firstCard: card,
+  card: Object.assign(
+    { marginLeft: 15 },
+    card
+  ),
   deleteButton: {
     position: 'absolute',
     height: 'auto',
