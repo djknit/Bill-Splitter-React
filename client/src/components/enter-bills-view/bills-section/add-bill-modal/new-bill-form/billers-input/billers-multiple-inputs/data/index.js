@@ -23,11 +23,20 @@ function addInput(n) {
       amount: AmountValueStoreFactory(),
       inputId: nextInputId++, // used for repeated element unique key
       get problems() {
-        console.log('....checking amount problemos')
-        console.log(this.amount.problems);
-        console.log(this.amount)
-        let problems = {
-          name: this.typeOrSelect === 'type'
+        const nameProblem = (
+          this.typeOrSelect === 'type' ?
+          this.typed === '' :
+          this.selectedAgentId === null
+        ) ? 'no-name' : null;
+        const amountProblem = this.amount.get().problem;
+        if (nameProblem === null && amountProblem === null) {
+          return null;
+        }
+        else {
+          return {
+            name: nameProblem,
+            amount: amountProblem
+          };
         }
       }
     });
@@ -84,12 +93,13 @@ let dataService = DataServiceFactory({
   isAsync: false,
   validateFunction() {
     let fail = false;
-    const inputProblems = inputValues.map(input => {
-      if (input.problems === null) return null;
-      else {
+    let inputProblems = {};
+    inputValues.forEach(input => {
+      const { problems, inputId } = input;
+      if (problems !== null) {
         fail = true;
-        return input.problems;
       }
+      inputProblems[inputId] = problems;
     });
     if (!fail) return null;
     return inputProblems;

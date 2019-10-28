@@ -11,6 +11,9 @@ export default function DataServiceFactory({
   validateFunction
 }) {
 
+  console.log('validate Function>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+  console.log(validateFunction)
+
   const emitter = new EventEmitter();
 
   let dataService = {
@@ -27,6 +30,7 @@ export default function DataServiceFactory({
     },
     getProblems: validateFunction || missingValidateFunction
   };
+  console.log(dataService)
 
   const methodKeys = Object.keys(methods);
 
