@@ -20,8 +20,6 @@ export default function AmountValueStoreFactory(type) {
 function AmountValueFactory(raw, options) {
   const isPercent = (options && options.isPercent) || false;
   const parsedValue = parseFloat(raw);
-  console.log(parsedValue)
-  console.log(!parsedValue)
   if (!parsedValue && parsedValue !== 0) {
     return {
       raw,

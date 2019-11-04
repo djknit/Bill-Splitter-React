@@ -34,7 +34,18 @@ let dataService = DataServiceFactory({
       setAmountPerPerson();
     }
   },
-  isAsync: false
+  isAsync: false,
+  validateFunction() {
+    let fail = false;
+    let inputProblems = {};
+    inputValues.forEach(input => {
+      const { problem, inputId } = input;
+      inputProblems[inputId] = problem;
+      if (problem !== null) fail = true;
+    });
+    if (fail === false) return null;
+    else return inputProblems;
+  }
 });
 
 getParticipants();
@@ -59,7 +70,10 @@ function getOptions(selectedParticipantId) {
 function addInput() {
   inputValues.push({
     selectedParticipantId: null,
-    inputId: nextInputId++
+    inputId: nextInputId++,
+    get problem() {
+      return this.selectedParticipantId === null ? 'no-name' : null;
+    }
   });
   setAmountPerPerson();
 }

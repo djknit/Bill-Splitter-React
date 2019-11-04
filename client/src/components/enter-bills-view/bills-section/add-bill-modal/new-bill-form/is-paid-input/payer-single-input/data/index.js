@@ -14,10 +14,6 @@ function reset() {
 
 let dataService = DataServiceFactory({
   readFunction() {
-    console.log( {
-      options: participants.map(({ name, id }) => ({ name, value: id })),
-      ...inputValue
-    })
     return {
       options: participants.map(({ name, id }) => ({ name, value: id })),
       ...inputValue

@@ -23,7 +23,17 @@ let responsibilityService = DataServiceFactory({
       individuallyService.reset();
     }
   },
-  isAsync: false
+  isAsync: false,
+  validateFunction() {
+    const { splittingMethod } = splittingMethodAndAllEvenlyAmountService.getValue();
+    console.log('VALIDATE responsibility');
+    console.log(this);
+    console.log(splittingMethod);
+    console.log('\n\n\n. . . . . . . . . . 000000\n\n\n')
+    if (splittingMethod === 'allEvenly') return null;
+    return splittingMethod === 'someEvenly' ?
+      someEvenlyService.getProblems() : individuallyService.getProblems();
+  }
 });
 
 splittingMethodAndAllEvenlyAmountService.subscribe(responsibilityService._emit);

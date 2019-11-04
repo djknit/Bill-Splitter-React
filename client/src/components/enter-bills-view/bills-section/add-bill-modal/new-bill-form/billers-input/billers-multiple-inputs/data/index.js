@@ -23,21 +23,7 @@ function addInput(n) {
       amount: AmountValueStoreFactory(),
       inputId: nextInputId++, // used for repeated element unique key
       get problems() {
-        const nameProblem = (
-          this.typeOrSelect === 'type' ?
-          this.typed === '' :
-          this.selectedAgentId === null
-        ) ? 'no-name' : null;
-        const amountProblem = this.amount.get().problem;
-        if (nameProblem === null && amountProblem === null) {
-          return null;
-        }
-        else {
-          return {
-            name: nameProblem,
-            amount: amountProblem
-          };
-        }
+        return getInputProblems(this);
       }
     });
   }
@@ -59,20 +45,51 @@ function getOptions(selectedAgentId) {
 
 let dataService = DataServiceFactory({
   readFunction() {
-    return inputValues.map(
-      ({
-        amount,
-        selectedAgentId,
-        ...otherProps
-      }) => (
+    let typedNamesInputIndexes = {};
+    let duplicateTypedNames = [];
+    let outputValues = inputValues.map(
+      (
         {
+          typeOrSelect,
+          amount,
+          selectedAgentId,
+          typed,
+          ...otherProps
+        },
+        index
+      ) => {
+        const problems = getInputProblems();
+        // only true if typed name is valid and being used (typeOrSelect == 'type')
+        const hasTypedName = !(problems && problems.name) && typeOrSelect === 'type';
+        let outputValue = {
           amount: amount.get(),
           selectedAgentId,
+          typed,
           ...otherProps,
-          options: getOptions(selectedAgentId)
+          options: getOptions(selectedAgentId),
+          problems
+        };
+        if (!hasTypedName) return outputValue;
+        if (typedNamesInputIndexes[typed] === undefined) {
+          typedNamesInputIndexes[typed] = [index];
         }
-      )
-    )
+        else {
+          if (duplicateTypedNames.indexOf(typed) !== -1) duplicateTypedNames.push(typed);
+          typedNamesInputIndexes[typed].push(index);
+        }
+        return outputValue;
+      }
+    );
+    duplicateTypedNames.forEach(dupTypedName => {
+      typedNamesInputIndexes[dupTypedName].forEach(inputIndex => {
+        const targetOutputValue = outputValues[inputIndex];
+        if (targetOutputValue.problems === null) {
+          targetOutputValue.problems = { amount: null };
+        }
+        targetOutputValue.problems.name = 'duplicate-name';
+      });
+    });
+    return outputValues;
   },
   methods: {
     update(index, propName, value) {
@@ -85,21 +102,19 @@ let dataService = DataServiceFactory({
       inputValues.splice(index, 1);
     },
     addInput() {
-      console.log('add input')
+      console.log('add input');
       addInput();
     },
     reset
   },
   isAsync: false,
-  validateFunction() {
+  validateFunction(billTotal) {
     let fail = false;
     let inputProblems = {};
+    let typedNames = {};
     inputValues.forEach(input => {
-      const { problems, inputId } = input;
-      if (problems !== null) {
-        fail = true;
-      }
-      inputProblems[inputId] = problems;
+      const { problems, inputId, typeOrSelect, typed } = input;
+      
     });
     if (!fail) return null;
     return inputProblems;
@@ -107,6 +122,32 @@ let dataService = DataServiceFactory({
 });
 
 export default dataService;
+
+function getInputProblems(inputValue) {
+  const { typeOrSelect, typed, selectedAgentId, amount } = inputValue;
+  let nameProblem;
+  let agentNames = agents.map(agent => agent.name);
+  if (!typeOrSelect) nameProblem = 'no-name-method';
+  else if (typeOrSelect === 'select') {
+    nameProblem = selectedAgentId === null ? 'no-name' : null;
+  }
+  else if (typeOrSelect === 'type') {
+    nameProblem = (typed === '' && 'no-name') ||
+      (agentNames.indexOf(typed) !== -1 && 'name-already-used') ||
+      null;
+  }
+  else nameProblem = 'bad-name-method';
+  const amountProblem = amount.get().problem;
+  if (nameProblem === null && amountProblem === null) {
+    return null;
+  }
+  else {
+    return {
+      name: nameProblem,
+      amount: amountProblem
+    };
+  }
+}
 
 getAgents();
 agentsService.subscribe(getAgents);
